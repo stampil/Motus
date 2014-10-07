@@ -4,7 +4,11 @@ setTimeout(displayGame,5000);
 function testTable(){
     if(inc_dico < dictionnaire.length){
         tableCreate();
-    } 
+    }
+    else{
+        document.getElementById("total_to_load").textContent = dictionnaire.length;
+        document.getElementById("nb_loaded").textContent = inc_dico;
+    }
 }
 function displayGame(){
 
