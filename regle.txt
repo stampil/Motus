@@ -1,0 +1,94 @@
+Bienvenue sur l'adaptation web de l'émission télé Motus diffusée sur France 2.
+BUT DU JEU
+Le jeu repose sur la recherche de mots d'un nombre fixé de lettres.
+Vous disposez de 6 tentatives pour découvrir un mot.
+
+Vous devez entrer votre proposition directement sur une ligne dans la grille de mot, grâce aux touches du clavier, puis appuyer sur la touche Entrée pour valider votre proposition. 
+Tant que vous n'avez pas validé votre proposition, vous pouvez revenir sur celle-ci grâce à la touche DEL.
+
+Une fois validé, le mot est analysé automatiquement. Les lettres bien placées sont marquées par un carré rouge, les lettres existantes mais mal placées sont marquées par un rond jaune. Les lettres n'existant pas dans le mot ne sont pas mises en évidence. Pour une lettre, ne peut être marqué que le nombre maximum d'occurrences de cette lettre dans le mot (par exemple, si le mot à trouver comporte 2 E et que vous proposez un mot comportant 3 E, seuls 2 E seront marqués).
+
+Les mots saisis dans la grille doivent être des mots reconnus valables.
+Mots non valables : les mots qui n'existent pas dans le dictionnaire de référence, les mots mal orthographiés, les noms propres, les mots composés, les verbes conjugués (seuls les infinitifs, participes passés et participes présents sont autorisés), les mots qui ne commencent pas par la première lettre indiquée, les mots déjà proposés dans la même grille, les mots trop courts.
+Comme dans l'émission, vous pouvez vous tromper et entrer un mot trop court. Le mot sera alors validé si vous appuyez sur la touche Entrée, mais sera considéré comme non valable
+
+Si vous ne soumettez pas un mot dans le temps imparti, la ligne sera considérée comme non valable.
+
+Si vous quittez une partie en cours, les points gagnés pendant la partie ne seront pas comptabilisés dans les classements.
+
+Vous pouvez choisir le nombre de lettres (de 6 à 10), la difficulté du vocabulaire (de facile à très difficile) et le temps de réflexion (10, 15 ou 20 secondes) dans la page Mon Profil.
+MODE ENTRAINEMENT
+Dans ce mode de jeu vous pouvez enchainer librement 5 grilles de mots. 
+Les grilles se succèdent. Si vous proposez un mot qui n'est pas accepté (voir cas ci-dessus), ou si vous ne proposez pas un mot dans le temps de réflexion imparti, vous passez automatiquement à la ligne suivante, jusqu'à la sixième tentative. 
+Si vous n'avez pas trouvé le mot à cette sixième tentative, le mot vous est révélé et vous passez à l a grille suivante sans marquer de point.
+MODE CHAMPIONS DE MOTUS
+Dans ce mode de jeu, vous affrontez un adversaire virtuel. Vous avez 40 adversaires à battre pour finir ce mode de jeu. Vous n'avez le droit de battre qu'un seul adversaire par jour, mais vous pouvez tenter de le battre plusieurs fois par jour si vous ne réussissez pas du premier coup.
+
+Chaque mot trouvé est récompensé par un double tirage de boules numérotées pour compléter une grille de chiffres.
+
+La totalité de la partie se joue avec 7 mots. Un tirage au sort est effectué en début de partie pour en déterminer les paramètres (nombre de lettres, niveau des mots, temps de réflexion). Si le tirage est bleu, les paramètres de l'adversaire sont pris en compte pour la partie. Si le tirage est jaune, ce sont vos paramètres de jeu qui sont pris en compte.
+
+Lors de la phase Mots, si vous proposez un mot qui n'est pas valable (voir cas ci-dessus), si vous ne proposez pas un mot dans le temps de réflexion imparti, ou si vous ne trouvez pas le mot en 6 tentatives, la main passe à l'adversaire. Ce dernier bénéficie d'une lettre bonus pour trouver le mot. Il peut faire autant de propositions qu'il reste de lignes sur la grille de mots. 
+Si l'adversaire se trompe également, la main vous revient à nouveau, et vous bénéficiez d'une lettre bonus supplémentaire. 
+Si personne ne parvient à trouver le mot à la sixième tentative après au moins un échange de main, le mot est révélé. Le joueur garde la main, mais il n'y a pas de tirage. 
+
+Vous pouvez passer le temps de réflexion de votre adversaire en cliquant sur le bouton "passer". Ce bouton prend effet pour tout le reste de la partie.
+
+Lors de la phase de grille de chiffres, vous avez le droit de tirer deux boules. Vous pouvez choisir votre boule en cliquant dessus, ou bien cliquer sur "tirage immédiat" pour choisir une boule au hasard. Le but est de compléter une ligne horizontale, verticale ou diagonale. Si vous complétez une ligne, vous marquez 100 points supplémentaires, les grilles sont changées et le jeu reprend son cours. 
+Si vous tombez sur une boule noire, la main passe directement à l'adversaire, vous ne terminez pas vos tirages, vous ne commencez pas de nouvelle grille de mots.
+
+Le joueur qui a marqué le plus de point lors de cette première manche gagne la partie et accède à la Super Partie. En cas d'égalité, il vous faudra rejouer la partie.
+
+Lors de la phase Super Partie, vous disposez d'un temps défini en fonction du nombre de lettres de la partie pour trouver 3 mots. Vous remportez des points supplémentaires si vous trouvez la totalité de ces mots.
+MODE DUEL
+Cas d'un duel provoqué
+" Dans ce mode de jeu, vous avez 3 mots à trouver dans les conditions de votre profil (nombres de lettres, niveau de difficulté, temps de réflexion). Vous avez autant de tentatives que nécessaire pour trouver 3 mots (par exemple, vous pouvez avoir besoin de 10 grilles pour trouver 3 mots). 
+Lorsque votre adversaire relèvera le duel, il recevra les mêmes grilles et le temps que vous avez mis pour trouver 3 mots servira de base pour son compte à rebours.
+Cas d'un duel relevé
+Lorsque vous relevez un duel, vous jouez avec la même liste de mots que votre adversaire. Vous disposez d'un temps imparti pour trouver 3 mots.  Ce temps correspond au temps mis par votre adversaire pour terminer sa propre partie. 
+
+Si vous trouvez les 3 mots en moins de temps que lui, vous remportez le duel. 
+Si vous ne trouvez pas les 3 mots et que le compte à rebours arrive à la fin, vous perdez le duel.
+Si il vous reste des questions, n'hésitez pas à nous contacter via cette page.
+BIEN JOUER A MOTUS POUR LES SELECTIONS
+Ayez le réflexe d’imprimer maintenant ce qui va suivre ou bien sauvegardez ce texte qui est un des "sésames" pour réussir nos sélections. Dites-vous bien que cette technique (dont le principe fonctionne aussi bien quel que soit le nombre de lettres) est celle apprise par la grande majorité des candidats qui participent à ce jeu… Alors, si d’autres ont réussi, pourquoi pas vous ?
+
+MOTUS se joue à deux, alors essayez de préparer en équipe et d’un commun accord trois ou quatre mots simples par lettre de l’alphabet afin d’ouvrir le jeu en plaçant d’une part toutes les voyelles dans les deux premières propositions sans oublier bien évidemment de relier ces voyelles par des consonnes qu’il faudra différencier (voir exemple plus loin), si vous voulez en faire apparaître un maximum dans la grille.
+
+Exemples à 9 lettres, le principe d’ouverture est valable pour un jeu de 8, 9 ou bien 10 lettres : 
+• Si votre première proposition est ABAISSEES, ne proposez pas ensuite ABAISSANT ; quand bien même les quatre premières lettres du mot seraient valables, ECARTEZ-VOUS TRES VITE de ces lettres existantes et changez votre fusil d’épaule sur les trois prochaines propositions en donnant par exemple : 
+ARTICULER,
+APPAUVRIR,
+AUTOROUTE.
+
+Dans ce jeu, il y a UN PIEGE ; celui de "décliner" vos propositions avec, par exemple, un même départ de mot à chaque ligne. C’est ainsi le meilleur moyen d’éliminer totalement vos chances "d’ouverture", et,  95 % des "mauvais" candidats se font avoir de cette façon !
+
+• D’autre part, plus vos propositions se ressembleront, et plus vous allez proposer quasiment les mêmes lettres : DANGER ! 
+Exemple d’attaque du jeu avec le C :
+CHANTEUSE  voyelles proposées : a, e, u, e / consonnes : h, t, s, n
+COMBATIFS  voyelles proposées : le i et le o manquants / consonnes : m, b, f
+CELTIQUES  suite des consonnes : l, q
+
+En plus des voyelles, 9 consonnes proposées ici en 3 coups, vous pouvez mieux faire !
+
+• S’il vous plaît, faites ensuite vraiment l’effort d’annuler de vos mots proposés les voyelles qui n’apparaissent pas. Vous allez gagner beaucoup de temps puisque celles-ci vous indiquent l’orientation du mot à trouver. Et quand bien même d’autres lettres proposées commenceraient à apparaître, c’est à ce moment là que se découvrent les joueurs ayant des facilités.
+
+NE TOMBEZ PAS DANS LE PIEGE, continuez d’ouvrir sur trois ou quatre propositions. Donnez par exemple un participe présent, un infinitif, des terminaisons en eur, oir, ion, etc. Par exemple DIRECTEUR, DOUBLAGES, DEVERSOIR, DAMNATION, DELOGEANT. 
+Moins vos propositions vont se ressembler, et plus aurez la chance, non seulement de faire apparaître de nouvelles lettres, mais, peut-être également, des blocs entiers du mot à trouver. 
+Jouer à MOTUS est un paradoxe : plus vous vous écartez de la solution (en "ouvrant" d’une manière intelligente) et plus vous aurez la possibilité de retomber sur vos pieds. Alors, faites dès le départ de la grille l’effort de vous concentrer sur des lettres qui ne sont pas encore apparues plutôt que sur la solution à trouver. 
+Gardez bien ce conseil en tête ; rester dans le "moule" des lettres bien placées au démarrage est extrêmement réducteur…
+
+• Continuons : à partir de la 3e ou de la 4e proposition, pensez à replacer les lettres en jaune en jetant un coup d’œil sur la totalité de la grille et non pas uniquement sur la ligne avec laquelle vous êtes en train de jouer.
+
+Quoiqu’il arrive, sécurité totale pour vous :
+les lettres bien placées de couleur rouge réapparaissent ligne après ligne. En aucun cas vous ne les perdrez, alors profitez-en dès le départ du jeu pour en proposer de nouvelles sur trois ou quatre propositions. 
+Faites-vous violence, c’est au commencement de la grille que les deux candidats - et pas un seul sur les deux comme c’est si souvent le cas - peuvent prendre la liberté d’ouvrir au maximum. Il sera trop tard lors de la dernière proposition !
+
+Pour bien jouer en finale :
+Dîtes-vous bien que vous n’aurez jamais le temps nécessaire d’aller au bout de vos 10 mots si vous déclinez vos propositions. 
+Exemple à ne JAMAIS FAIRE : DECO CHAGE, DECO CHANT, DECO UVRIR, etc.
+
+Cette série d’exemples est également valable pour la première partie, et, surtout, quelque soit le nombre de lettres avec lequel vous allez jouer. A vous d’adapter vos mots d’attaque en conséquence. Procédez de la même façon que dans la première partie. Au début de la finale, et pas dans la dernière minute, les candidats "éclairés" font abstraction de la deuxième lettre proposée pendant les deux ou trois premières propositions. Cela permet de garder de bons réflexes de départ afin de ne pas se laisser aveugler, c’est-à-dire formater tout de suite les propositions sur cette deuxième lettre, chose qui pourrait TRES VITE limiter vos chances d’ouverture du jeu… 
+Exemple flagrant : vous penserez à ces conseils lorsque vous voyez à la télé le nombre de candidats qui paniquent parce que la deuxième lettre proposée est un "Y", un "Q" ou bien un "Z" ! Oubliez-la simplement et OUVREZ comme si c’était la première partie du jeu en proposant vos mots d’attaque, sans oublier les voyelles ainsi que les consonnes les plus usitées (m, n, r, s, t, l,…).
+
+A vous de parfaire la méthode, bon entraînement, et rendez-vous dans nos nouvelles sélections !
