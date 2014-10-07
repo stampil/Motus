@@ -1,5 +1,5 @@
 #loading_dico{
-    display:none;
+    display:block;
 }
 #game_table{
     border:1px solid #c5deea;
@@ -23,4 +23,5 @@
     font-size: 3em;
     text-align: center;
     color:whitesmoke;
+    text-transform: capitalize;
 }
