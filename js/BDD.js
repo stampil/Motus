@@ -55,6 +55,6 @@ function tableCreate() {
     document.getElementById('loading_dico').style.display = "block";
     document.getElementById("total_to_load").textContent = dictionnaire.length;
 
-    interval_dico = setInterval(fillTable, 500);
+    interval_dico = setInterval(fillTable, 50);
 }
 
