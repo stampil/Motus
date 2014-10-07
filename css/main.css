@@ -20,19 +20,22 @@
     background: -o-linear-gradient(top,  #c5deea 0%,#8abbd7 17%,#066dab 100%); /* Opera 11.10+ */
     background: -ms-linear-gradient(top,  #c5deea 0%,#8abbd7 17%,#066dab 100%); /* IE10+ */
     background: linear-gradient(to bottom,  #c5deea 0%,#8abbd7 17%,#066dab 100%); /* W3C */
-    font-size: 3em;
+    font-size: 2.5em;
     text-align: center;
     color:whitesmoke;
     text-transform: capitalize;
 }
 
-.bad_placement{
-    background: orange;
+#game_table td div{
     margin:3px 3px 3px 4px;
-    border-radius: 40px;
-    width: 50px;
-    height: 38px;
+    width: 42px;
+    height: 28px;
     padding: 0 0 15px 0;
+}
+
+.bad_placement{
+
+    border-radius: 40px;
     background: #f9c667; /* Old browsers */
     background: -moz-linear-gradient(top,  #f9c667 0%, #f79621 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9c667), color-stop(100%,#f79621)); /* Chrome,Safari4+ */
@@ -45,11 +48,6 @@
 }
 
 .not_exist{
-    background: red;
-    margin:3px 3px 3px 4px;
-    width: 50px;
-    height: 38px;
-    padding: 0 0 15px 0; 
     background: #ff3019; /* Old browsers */
     background: -moz-linear-gradient(top,  #ff3019 0%, #cf0404 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff3019), color-stop(100%,#cf0404)); /* Chrome,Safari4+ */
