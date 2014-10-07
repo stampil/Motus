@@ -13,7 +13,6 @@
     border:1px solid #c5deea;
     padding:0px;
     height: 41px;
-    width: 52px;  
     background: -moz-linear-gradient(top,  #c5deea 0%, #8abbd7 17%, #066dab 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#c5deea), color-stop(17%,#8abbd7), color-stop(100%,#066dab)); /* Chrome,Safari4+ */
     background: -webkit-linear-gradient(top,  #c5deea 0%,#8abbd7 17%,#066dab 100%); /* Chrome10+,Safari5.1+ */
