@@ -15,5 +15,7 @@ function displayGame(){
 }
 
 function displayWord(word){
-     document.getElementById("game").innerHTML=inc_dico+') '+word;
+    for (var i=0;i<word.length; i++){
+        document.getElementById("L1C"+(i+1)).innerHTML=word[i];
+    }
 }
