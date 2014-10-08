@@ -15,7 +15,7 @@ function onError(e, t) {
     console.error(e, t);
 }
 function dicoInserted() {
-    document.getElementById("nb_loaded").textContent = Math.round(inc_dico/dictionnaire.length*100);
+    document.getElementById("nb_loaded").textContent = dictionnaire[inc_dico];
     inc_dico++;
 }
 function getWord(rowid) {
@@ -39,7 +39,6 @@ function fillTable() {
     db.transaction(function (tx) {
 
         cookie.set("inc_dico", inc_dico);
-        console.log(dictionnaire.length, inc_dico,dictionnaire[inc_dico]);
         tx.executeSql(
                 'INSERT INTO dictionnaire (word) VALUES (?)',
                 [dictionnaire[inc_dico]],

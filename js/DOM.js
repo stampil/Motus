@@ -6,7 +6,7 @@ function testTable(){
         tableCreate();
     }
     else{
-        document.getElementById("nb_loaded").textContent = Math.round(inc_dico/dictionnaire.length*100);
+        document.getElementById("nb_loaded").textContent = Math.round(inc_dico/dictionnaire.length*100)+'%';
     }
 }
 function displayGame(){
