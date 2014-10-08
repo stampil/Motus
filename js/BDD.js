@@ -51,7 +51,7 @@ function fillTable() {
 function tableCreate() {
     console.log('filltable');
     document.getElementById('loading_dico').style.display = "block";
-    document.getElementById("nb_loaded").textContent = Math.round(inc_dico/dictionnaire.length*100);
+    document.getElementById("nb_loaded").textContent = Math.round(inc_dico/dictionnaire.length*100)+'%';
 
     interval_dico = setInterval(fillTable, 50);
 }
