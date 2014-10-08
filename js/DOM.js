@@ -6,8 +6,7 @@ function testTable(){
         tableCreate();
     }
     else{
-        document.getElementById("total_to_load").textContent = dictionnaire.length;
-        document.getElementById("nb_loaded").textContent = inc_dico;
+        document.getElementById("nb_loaded").textContent = Math.round(inc_dico/dictionnaire.length*100);
     }
 }
 function displayGame(){

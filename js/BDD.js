@@ -17,7 +17,8 @@ function onError(e, t) {
     console.error(e, t);
 }
 function dicoInserted() {
-    document.getElementById("nb_loaded").textContent = ++inc_dico;
+    document.getElementById("nb_loaded").textContent = Math.round(inc_dico/dictionnaire.length*100);
+    inc_dico++;
 }
 function getWord(rowid) {
     console.info("getWord("+rowid+")");
@@ -53,7 +54,7 @@ function fillTable() {
 function tableCreate() {
     console.log('table created');
     document.getElementById('loading_dico').style.display = "block";
-    document.getElementById("total_to_load").textContent = dictionnaire.length;
+    document.getElementById("nb_loaded").textContent = Math.round(inc_dico/dictionnaire.length*100);
 
     interval_dico = setInterval(fillTable, 50);
 }
