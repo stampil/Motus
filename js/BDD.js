@@ -1,13 +1,12 @@
 console.log("start",new Date().getTime());
-var db;
-var check_inc = cookie.get("inc_dico");
+check_inc = cookie.get("inc_dico");
 if (check_inc) {
     inc_dico = parseInt(check_inc);
 }
 
 db = openDatabase('bdd', '', 'database', 5 * 1024 * 1024);
 console.log('opendatabase send at  ',new Date().getTime());
-var interval_checkdb = setInterval(function(){
+interval_checkdb = setInterval(function(){
     if (db){
         console.log('opendatabase opened at',new Date().getTime());
         clearInterval(interval_checkdb);
