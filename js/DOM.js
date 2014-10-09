@@ -15,8 +15,8 @@ function displayGame(){
    
 }
 
-function displayWord(word){
-    for (var i=0;i<word.length; i++){
-        document.getElementById("L1C"+(i+1)).innerHTML=word[i];
+function displayWord(mot){
+    for (var i=0;i<mot.length; i++){
+        document.getElementById("L1C"+(i+1)).innerHTML=mot[i];
     }
 }
