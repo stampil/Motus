@@ -50,7 +50,8 @@
         
         <p>
             Le chargement du dictionnaire est une problematique en soit. Le choix a été de stocker le dictionnaire en bdd pour facilité les verifications des mot rentrer par l'utilisateur.<br />
-            le chargement est assez long ( 7min) pour que l'utilisateur ferme l'application et la reouvre.<br />
+            le chargement est assez long ( 5 à 7min ) pour que l'utilisateur ferme l'application et la reouvre.<br />
+            ce temps dépend de l'interval choisie, sachant qu'en moyenne une requete d'insertion met 5 sec, mais qu'il faut laisser de la place a d'autres requete de s'y glisser, j'ai opté de faire une requete toutes les 100ms<br >
             <img src="./img/chargement_dico.png" alt="" /><br />
             j'ai choisi de stocker en local storage ( equivalent cookie pour appli smartphone) l'incrémentation des mots inséré ( inc_dico ).<br />
             cela permet de reprendre le chargement là ou il est resté, et j'ai enfin pu utilisé le callback de websql pour l'insertion de donnée, m'assurant que le mot a bien été enregistré en base de donnée avant d'incrémenter au mot suivant.<br />

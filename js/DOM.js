@@ -8,15 +8,10 @@ function testTable(){
         document.getElementById("nb_loaded").textContent = Math.round(inc_dico/dictionnaire.length*100)+'%';
     }
 }
-function displayGame(){
 
-    var random = Math.floor(Math.random() * inc_dico) + 1;
-    getWord(random);
-   
-}
 
-function displayWord(mot){
+function displayWord(line,mot){
     for (var i=0;i<mot.length; i++){
-        document.getElementById("L1C"+(i+1)).innerHTML=mot[i];
+        document.getElementById("L"+line+"C"+(i+1)).innerHTML=mot[i];
     }
 }
