@@ -5,3 +5,4 @@ var db;
 var check_inc =null;
 var interval_checkdb =null;
 var nb_essai = 6;
+var last_insert = false;

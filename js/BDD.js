@@ -45,18 +45,42 @@ function onError(e, t) {
     console.error(e, t);
 }
 
+function end_loading(){
+    //peut etre appellé plusieurs fois a cause des multiples retour asynchrones
+    document.getElementById('loading_dico').style.display="none";
+    clearInterval(interval_dico);
+}
+
 function dicoInserted() {
-    document.getElementById("nb_loaded").textContent = dictionnaire[inc_dico];
+    var ret = document.getElementById("nb_loaded");
+    ret.textContent ="";
+    if(inc_dico>=dictionnaire.length-1){
+        //plein de retour asynchrone, les en retards on ne les traitent plus
+        end_loading();
+        return;
+    }
+    ret.textContent =dictionnaire[inc_dico];
     inc_dico++;
     cookie.set("inc_dico", inc_dico);
 }
 
 function fillTable() {
-    if (inc_dico >= dictionnaire.length) {
-        clearInterval(interval_dico);
-        console.log("fin remplissage table  ",new Date());
-    }
+
     db.transaction(function (tx) {
+        if (inc_dico > dictionnaire.length-1) {
+            end_loading();
+            //console.log("end_loading");
+            return;
+        }
+        if(inc_dico == dictionnaire.length-1 && !last_insert){
+            last_insert=true;
+            //console.log("last insert");
+        }
+        else if(inc_dico == dictionnaire.length-1){
+            //console.log("too late");
+            return;
+        }
+    
         tx.executeSql(
             'INSERT INTO dictionnaire (mot) VALUES (?)',
             [dictionnaire[inc_dico]],
@@ -67,10 +91,8 @@ function fillTable() {
 }
 
 function tableCreate() {
-    console.log("debut remplissage table",new Date());
     document.getElementById('loading_dico').style.display = "block";
     document.getElementById("nb_loaded").textContent = Math.round(inc_dico/dictionnaire.length*100)+'%';
-
     interval_dico = setInterval(fillTable, 10);
 }
 

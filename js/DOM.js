@@ -17,7 +17,7 @@ function construct_game_table(){
 construct_game_table();
 
 function testTable(){
-    if(inc_dico < dictionnaire.length){
+    if(inc_dico < dictionnaire.length-1){
         tableCreate();
     }
     else{
