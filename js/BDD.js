@@ -6,10 +6,25 @@ if (check_inc) {
 inc_dico++;
 
 db = openDatabase('bdd', '', 'database', 5 * 1024 * 1024);
-db.transaction(function (tx) {
-            tx.executeSql('CREATE TABLE IF NOT EXISTS dictionnaire\n\
+console.log('opendatabase send at  ',new Date().getTime());
+var interval_checkdb = setInterval(function(){
+    if (db){
+        console.log('opendatabase opened at',new Date().getTime());
+        clearInterval(interval_checkdb);
+        init();
+    }
+},1);
+//console.log('si on met une instruction db.transaction ici, db à de forte chance de ne pas encore existé, à ce temps là: ',new Date().getTime());
+
+function init(){
+    db.transaction(function (tx) {
+        tx.executeSql('CREATE TABLE IF NOT EXISTS dictionnaire\n\
                              (word VARCHAR)');
-        });
+        setTimeout(testTable,200);
+        setTimeout(displayGame,500);
+    });
+}
+
 
 function onError(e, t) {
     console.error(e, t);

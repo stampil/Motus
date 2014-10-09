@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Problématique</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Problèmatiques rencontrées</h1>
+        <p>Lors de la récuperation du dictionnaire, pour ne récuperer que les mot qui n'ont que 7 caracteres, j'ai choisi de faire un import data dans une BDD mysql<br />
+        puis à l'aide de la fonction LENGTH() de mysql, j'ai exporté les mots de 7 lettres.<br />
+        Probleme: LENGHT() ne renvoie pas la longueur du mot, mais la taille que prend un mot, et un accent prend plus de place suivant l'encodage choisi
+        (utf8, latin1)... bien que les accents apparaissaient correctement, il a fallut "jouer" sur l'encodage du fichier txt du dictionnaire, sur l'encodage d'import, et l'encodage de stockage mysql, pour qu'ils correspondent.<br />
+        une autre solution est d'utilisé la fonction character_length() à la place de length(), mais instinctivement, on a tendance à utiliser length() qui est trompeur...
+        </p>
+        <p>
+            Le choix de la bdd local, bien que websql est deprecated, et que tout le monde conseil d'utilisé innoDB, seul websql est compatible avec IOS et android pour les appli phonegap en ce moment.<br />
+            websql utilise des transaction asynchrones, le problemes est que ces callback de ne lance que si la requete a été executée.<br />
+            db = openDatabase('bdd', '', 'database', 5 * 1024 * 1024, callback);<br />
+            ce callback n'est donc appellé qu'une seule fois dans le processus, a la création de la BDD, si on utilise se callback pour continuer le processus, au rechargement de l'appli, plus rien ne se passera.
+            si on continue le requetage juste en dessous, il y a des chance qu'au premier lancement la base n'a pas terminé de se créer que l'on cherche a interagir avec des tables.
+            Par contre db, lui existe a la création de la base de donnée, et au appel suivant, la solution a été de tester toutes les milli-secondes l'existance de db, puis une fois cette existance certaine, continuer le processus à ce niveau là ( en appellant une fonction init() ).
+            
+        </p>
+        <p>
+            
+        </p>
+    </body>
+</html>
