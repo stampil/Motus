@@ -5,13 +5,13 @@ if (check_inc) {
     inc_dico = parseInt(check_inc);
 }
 
-db = openDatabase('bdd', '', 'database', 1 * 1024 * 1024);
+db = openDatabase('bdd', '', 'database', 5 * 1024 * 1024);
 console.log('opendatabase send at  ',new Date().getTime());
 var interval_checkdb = setInterval(function(){
     if (db){
         console.log('opendatabase opened at',new Date().getTime());
         clearInterval(interval_checkdb);
-        init();
+        setTimeout(init,100);
     }
 },1);
 //console.log('si on met une instruction db.transaction ici, db à de forte chance de ne pas encore existé, à ce temps là: ',new Date().getTime());
