@@ -80,7 +80,7 @@ function fillTable() {
             //console.log("too late");
             return;
         }
-    
+        console.log(dictionnaire[inc_dico],inc_dico);
         tx.executeSql(
             'INSERT INTO dictionnaire (mot) VALUES (?)',
             [dictionnaire[inc_dico]],
