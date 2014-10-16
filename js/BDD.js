@@ -23,21 +23,7 @@ function init(){
         setTimeout(function(){
             getWord(1);
         },300);
-        setTimeout(function(){
-            getWord(2);
-        },400);
-        setTimeout(function(){
-            getWord(3);
-        },450);
-        setTimeout(function(){
-            getWord(4);
-        },500);
-        setTimeout(function(){
-            getWord(5);
-        },550);
-        setTimeout(function(){
-            getWord(6);
-        },600);
+        
     });
 }
 

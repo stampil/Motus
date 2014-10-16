@@ -58,3 +58,21 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3019', endColorstr='#cf0404',GradientType=0 ); /* IE6-9 */
 
 }
+#clavier{
+    max-width: 500px;
+text-transform: capitalize;
+text-align: center;
+margin-top: 13px;
+}
+.touches{
+display: inline-block;
+border: 1px solid gray;
+padding: 10px;
+width: 32px;
+text-align: center;
+border-radius: 5px;
+background: whitesmoke;
+color: black;
+cursor: pointer;
+box-shadow: 1px 1px 12px #555;
+}
