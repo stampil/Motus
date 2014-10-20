@@ -11,7 +11,7 @@
     <feature name="http://api.phonegap.com/1.0/network"/>
     <feature name="http://api.phonegap.com/1.0/device" />
     <preference name="permissions" value="none" />
-    <preference name="orientation" value="portrait" />
+    <preference name="orientation" value="default" />
     <preference name="target-device" value="universal" />
     <preference name="fullscreen" value="true" />
     <preference name="webviewbounce" value="true" />
@@ -29,6 +29,7 @@
     <preference name="android-installLocation" value="auto" />
     <plugin name="SplashScreen" value="org.apache.cordova.SplashScreen"/>
     <gap:plugin name="org.apache.cordova.splashscreen" />
+    <gap:plugin name="net.yoik.cordova.plugins.screenorientation" />
     <icon src="icon.png" />
     <gap:splash rc="splash.png" />
     <icon gap:density="ldpi" gap:platform="android" src="res/icon/android/icon-36-ldpi.png" />

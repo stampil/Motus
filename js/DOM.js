@@ -1,3 +1,11 @@
+ window.addEventListener("orientationchange", orientationChange, true);
+ 
+ function orientationChange(e) {
+         var orientation="portrait";
+         if(window.orientation == -90 || window.orientation == 90) orientation = "landscape";
+             document.getElementById("version").innerHTML+=orientation+" "+JSON.stringify(e);
+     }
+
 function construct_game_table() {
     var o = document.getElementById("tableau");
     var table = document.createElement('table');
@@ -9,6 +17,7 @@ function construct_game_table() {
             var td = document.createElement('td');
             var div = document.createElement('div');
             div.setAttribute('id', 'L' + (i + 1) + 'C' + (j + 1));
+            div.textContent=".";
             tr.appendChild(td).appendChild(div);
         }
         table.appendChild(tr);
