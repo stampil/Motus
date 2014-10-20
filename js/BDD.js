@@ -21,6 +21,7 @@ function init(){
                              (mot VARCHAR)');
         setTimeout(testTable,200);
         setTimeout(function(){
+            initGame()
             getWord(1);
         },300);
         

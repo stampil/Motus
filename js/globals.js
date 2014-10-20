@@ -8,6 +8,9 @@ var nb_essai = 6;
 var last_insert = false;
 var toFind ="";
 var tryWord="";
+var goodKey = new Array();
+var nb_reussite=0;
+var nb_game=0;
 
 var C=2;
 var L=1;
