@@ -93,8 +93,7 @@ function getWord(line) {
                 'SELECT mot FROM dictionnaire WHERE rowid=?',
                 [rowid],
                 function (tx, result) {
-                    displayWord(line,"motiver");
-                    //displayWord(line,result.rows.item(0).mot);
+                    displayWord(line,result.rows.item(0).mot);
                 }.bind(line),
                 onError
                 );
