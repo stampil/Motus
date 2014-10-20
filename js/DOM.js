@@ -94,17 +94,31 @@ function compareWord(callback) {
     var call = 0;
     for (var i = 0; i < dictionnaire[0].length; i++) {
         setTimeout(function () {
-
             console.log("timeout", call);
             if (tryWord[call] == toFind[call]) {
                 lightCase(L, (call + 1), "good_placement");
                 goodKey[call] = tryWord[call];
+               
+            }
+            else{
+                 if(is_bad_placed(tryWord[call])){
+                     lightCase(L, (call + 1), "bad_placement");
+                 }
             }
             call++;
             if (call == dictionnaire[0].length && typeof callback == "function")
                 callback();
         }, 500 * i);
     }
+}
+
+function is_bad_placed(key){
+    for (var i =0; i <toFind.length; i++){
+        if(toFind[i]==key && goodKey[i]=="." ){
+            //si pas encore trouvé ( goodKey[i] =="."
+            return true;
+        }
+    } 
 }
 
 function constructClavier() {
