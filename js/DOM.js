@@ -1,4 +1,7 @@
  window.addEventListener("orientationchange", orientationChange, true);
+ screen.addEventListener("orientationchange", function() {
+    alert("the orientation of the device is now " + screen.orientation);
+});
  
  function orientationChange() {
         var currentOrientation = window.plugins.orientationchanger.getOrientation();
