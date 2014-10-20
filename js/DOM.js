@@ -1,5 +1,10 @@
-var currentOrientation = window.plugins.orientationchanger.getOrientation();
-document.getElementById("version").innerHTML=currentOrientation;
+ window.addEventListener("orientationchange", orientationChange, true);
+ 
+ function orientationChange() {
+        var currentOrientation = window.plugins.orientationchanger.getOrientation();
+             document.getElementById("version").innerHTML="orientation "+currentOrientation;
+     }
+orientationChange();
 
 function construct_game_table() {
     var o = document.getElementById("tableau");
