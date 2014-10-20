@@ -71,7 +71,8 @@
             la longueur du clavier virtuel peut etre plus grande en portrait, j'ai eu besoin de differencier ce changement d'orientation pour regler cette longueur.<br />
             naturellement j'ai chercher des plugins phonegap, il y en a 2 actuellement, mais ils ne sont pas compatible avec ios, et ne fonctionne pas comme esperé, à la detection portrait/landscape, quoi qu'il arrive cela affichait : default.<br />
             sur internet j'ai vu que ios et android lançait l'evenemenet orientationchange, avec en paramettre un objet specifiant l'orientation. malheureusement avec mes tests mon smartphone ne lance cette evenement avec aucun parametre.<br />
-            mais heureusements on peut facilement recalculer l'orientation portrait/paysage en comparant simplement la longueur entre width et le height. a noter le widthxheight sur une page correspond a heightxwidth sur le mobile, c'est inversé, un landscape web correspond a un portrait mobile...
+            mais heureusements on peut facilement recalculer l'orientation portrait/paysage en comparant simplement la longueur entre width et le height. a noter le widthxheight sur une page correspond a heightxwidth sur le mobile, c'est inversé, un landscape web correspond a un portrait mobile...<br />
+            apres une recherche plus aprronfondie, les smartphones donne une valeur d'orientation avec window.orientation mais la valeur differe suivant le type de mobile, donc inutilisable dans un context multi-device.
         </p>
         
 

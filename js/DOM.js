@@ -3,15 +3,14 @@
  var nb_orient=0;
  function orientationChange() {
      var orientation = "portrait";
-     if(window.innerWidth>window.innerHeight) orientation = "landscape";
-     if(orientation=="landscape"){
+     if(window.innerWidth<window.innerHeight) orientation = "landscape"; // on mobile widthxheight are inversed
+     if(orientation=="portrait"){
          document.getElementById("clavier").style.width="auto";
      }
      else{
          document.getElementById("clavier").style.width="190px";
      }
-    document.getElementById("version").innerHTML="orientation "+(++nb_orient)+" "+orientation+" "+window.innerWidth+"x"+window.innerHeight+", "+screen.width+"x"+screen.height;
-    if( window.orientation) alert( window.orientation);
+    
  }
 
 
@@ -84,5 +83,5 @@ function light_case(line,column,type){
 }
 light_case(1,1,"not_exist");
 light_case(1,2,"not_exist");
-light_case(1,6,"bad_placement");
+light_case(1,3,"bad_placement");
 light_case(1,7,"bad_placement");
