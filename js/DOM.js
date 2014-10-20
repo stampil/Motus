@@ -2,9 +2,15 @@
 
  var nb_orient=0;
  function orientationChange() {
-     
-    document.getElementById("version").innerHTML="orientation "+(++nb_orient);
-    if( window.screen && window.screen.orientation) alert(window.screen.orientation);
+     var orientation = "portrait";
+     if(window.innerWidth>window.innerHeight) orientation = "landscape";
+     if(orientation=="portrait"){
+         document.getElementById("clavier").style.width="auto";
+     }
+     else{
+         document.getElementById("clavier").style.width="190px";
+     }
+    document.getElementById("version").innerHTML="orientation "+(++nb_orient)+" "+orientation;
 
  }
 
@@ -26,9 +32,6 @@ function construct_game_table() {
         table.appendChild(tr);
     }
 }
-
-var C=2;
-var L=1;
 
 function write_key(key){
     
@@ -79,6 +82,7 @@ function displayWord(line, mot) {
 function light_case(line,column,type){
     document.getElementById("L" + line + "C" + column).classList.add(type);
 }
-
+light_case(1,2,"not_exist");
 light_case(1,4,"not_exist");
 light_case(1,5,"bad_placement");
+light_case(1,7,"bad_placement");
