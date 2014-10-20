@@ -1,10 +1,5 @@
- window.addEventListener("orientationchange", orientationChange, true);
- 
- function orientationChange(e) {
-         var orientation="portrait";
-         if(window.orientation == -90 || window.orientation == 90) orientation = "landscape";
-             document.getElementById("version").innerHTML+=orientation+" "+JSON.stringify(e);
-     }
+var currentOrientation = window.plugins.orientationchanger.getOrientation();
+document.getElementById("version").innerHTML=currentOrientation;
 
 function construct_game_table() {
     var o = document.getElementById("tableau");
