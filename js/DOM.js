@@ -81,7 +81,7 @@ function displayWord(line, mot) {
 function light_case(line,column,type){
     document.getElementById("L" + line + "C" + column).classList.add(type);
 }
-light_case(1,1,"not_exist");
+/*light_case(1,1,"not_exist");
 light_case(1,2,"not_exist");
 light_case(1,3,"bad_placement");
-light_case(1,7,"bad_placement");
+light_case(1,7,"bad_placement");*/
