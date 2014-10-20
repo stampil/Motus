@@ -11,6 +11,7 @@ var tryWord="";
 var goodKey = new Array();
 var nb_reussite=0;
 var nb_game=0;
+var letter_checked=new Array();
 
 var C=2;
 var L=1;

@@ -92,15 +92,15 @@ function writeKey(key) {
 function compareWord(callback) {
     console.log(tryWord, toFind);
     var call = 0;
+    letter_checked=new Array();
     for (var i = 0; i < dictionnaire[0].length; i++) {
         setTimeout(function () {
             console.log("timeout", call);
             if (tryWord[call] == toFind[call]) {
-                lightCase(L, (call + 1), "good_placement");
-                goodKey[call] = tryWord[call];
-               
+                lightCase(L, (call + 1), "good_placement"); 
             }
             else{
+                
                  if(is_bad_placed(tryWord[call])){
                      lightCase(L, (call + 1), "bad_placement");
                  }
@@ -114,8 +114,16 @@ function compareWord(callback) {
 
 function is_bad_placed(key){
     for (var i =0; i <toFind.length; i++){
-        if(toFind[i]==key && goodKey[i]=="." ){
-            //si pas encore trouvé ( goodKey[i] =="."
+        if (tryWord[i] == toFind[i]) {
+            goodKey[i] = tryWord[i];
+        }
+    }
+    
+    
+    for (var i =0; i <toFind.length; i++){
+        if(toFind[i]==key && goodKey[i]=="." && letter_checked.indexOf(key)==-1 ){
+            letter_checked.push(key);
+            //si pas encore trouvé ( goodKey[i] =="." = remplir le goodkey ici ( avant le if et pas dans le settimeout
             return true;
         }
     } 
@@ -202,9 +210,3 @@ function setSoluce() {
 function displayScore() {
     document.getElementById('score').textContent = "mot" + (nb_reussite > 1 ? "s" : "") + " trouvé" + (nb_reussite > 1 ? "s" : "") + " : " + nb_reussite + "/" + nb_game;
 }
-
-/*
- lightCase(1, 1, "good_placement");
- lightCase(1, 2, "good_placement");
- lightCase(1, 3, "bad_placement");
- lightCase(1, 7, "bad_placement");*/
