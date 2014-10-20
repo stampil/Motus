@@ -128,7 +128,7 @@ function initGame() {
     C = 2;
     L = 1;
     for (var i = 0; i < dictionnaire[0].length; i++) {
-        goodKey.push(".");
+        goodKey[i]=".";
     }
     constructGameTable();
     constructClavier();
