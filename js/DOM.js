@@ -1,12 +1,12 @@
  window.addEventListener("orientationchange", orientationChange, true);
- screen.addEventListener("orientationchange", function() {
-    alert("the orientation of the device is now " + screen.orientation);
-});
- 
+
+ var nb_orient=0;
  function orientationChange() {
+     if(window.plugins){
         var currentOrientation = window.plugins.orientationchanger.getOrientation();
-             document.getElementById("version").innerHTML="orientation "+currentOrientation;
+             document.getElementById("version").innerHTML="orientation "+(++nb_orient)+" "+currentOrientation;
      }
+ }
 orientationChange();
 
 function construct_game_table() {
