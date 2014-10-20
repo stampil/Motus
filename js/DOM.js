@@ -11,7 +11,7 @@
          document.getElementById("clavier").style.width="190px";
      }
     document.getElementById("version").innerHTML="orientation "+(++nb_orient)+" "+orientation+" "+window.innerWidth+"x"+window.innerHeight+", "+screen.width+"x"+screen.height;
-
+    if( window.orientation) alert( window.orientation);
  }
 
 
@@ -82,7 +82,7 @@ function displayWord(line, mot) {
 function light_case(line,column,type){
     document.getElementById("L" + line + "C" + column).classList.add(type);
 }
+light_case(1,1,"not_exist");
 light_case(1,2,"not_exist");
-light_case(1,4,"not_exist");
-light_case(1,5,"bad_placement");
+light_case(1,6,"bad_placement");
 light_case(1,7,"bad_placement");
