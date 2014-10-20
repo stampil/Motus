@@ -1,10 +1,10 @@
  window.addEventListener("orientationchange", orientationChange, true);
 
  var nb_orient=0;
- function orientationChange(e) {
+ function orientationChange() {
      
     document.getElementById("version").innerHTML="orientation "+(++nb_orient);
-    if(e) alert(JSON.stringify(e));
+    if( window.screen && window.screen.orientation) alert(window.screen.orientation);
 
  }
 
