@@ -1,5 +1,9 @@
+body{
+    margin:4px;
+}
 #loading_dico{
     display:block;
+    margin-top: 8px;
 }
 #game_table{
     border:1px solid #c5deea;
@@ -18,7 +22,7 @@
     background: -o-linear-gradient(top,  #c5deea 0%,#8abbd7 17%,#066dab 100%); /* Opera 11.10+ */
     background: -ms-linear-gradient(top,  #c5deea 0%,#8abbd7 17%,#066dab 100%); /* IE10+ */
     background: linear-gradient(to bottom,  #c5deea 0%,#8abbd7 17%,#066dab 100%); /* W3C */
-    font-size: 1.7em;
+    font-size: 1.4em;
     font-weight: bold;
     text-align: center;
     color:whitesmoke;
@@ -27,8 +31,8 @@
 
 #game_table td div{
     margin:3px 3px 3px 4px;
-    width: 20px;
-    height: 14px;
+    width: 25px;
+    height: 11px;
     padding: 0 0 15px 0;
 }
 
@@ -58,7 +62,7 @@
 
 }
 #clavier{
-    max-width: 291px;
+width: 190px;
 text-transform: capitalize;
 text-align: center;
 margin-top: 13px;
@@ -70,8 +74,8 @@ display:inline-block;
 .touches{
 display: inline-block;
 border: 1px solid gray;
-padding: 10px;
-width: 26px;
+padding: 6px 0px;
+width:32px;
 text-align: center;
 border-radius: 5px;
 background: whitesmoke;
