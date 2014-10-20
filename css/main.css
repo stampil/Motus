@@ -70,6 +70,8 @@ display:inline-block;
 }
 #tableau{
     display:inline-block;
+    box-shadow: 1px 1px 12px #555;
+
 }
 .touches{
 display: inline-block;
