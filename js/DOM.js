@@ -4,13 +4,13 @@
  function orientationChange() {
      var orientation = "portrait";
      if(window.innerWidth>window.innerHeight) orientation = "landscape";
-     if(orientation=="portrait"){
+     if(orientation=="landscape"){
          document.getElementById("clavier").style.width="auto";
      }
      else{
          document.getElementById("clavier").style.width="190px";
      }
-    document.getElementById("version").innerHTML="orientation "+(++nb_orient)+" "+orientation;
+    document.getElementById("version").innerHTML="orientation "+(++nb_orient)+" "+orientation+" "+window.innerWidth+"x"+window.innerHeight+", "+screen.width+"x"+screen.height;
 
  }
 
