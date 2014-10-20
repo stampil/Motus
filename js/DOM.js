@@ -65,10 +65,11 @@ function writeKey(key) {
             L++;
             setCurrentColumn(C);
             tryWord = "";
-            for (var i = 1; i < goodKey.length; i++) {
-                document.getElementById("L" + L + "C" + (i + 1)).textContent = goodKey[i];
-            }
+
             if (document.getElementById("L" + L + "C" + 1)) {
+                for (var i = 1; i < goodKey.length; i++) {
+                    document.getElementById("L" + L + "C" + (i + 1)).textContent = goodKey[i];
+                }
                 document.getElementById("L" + L + "C" + 1).textContent = document.getElementById("L" + (L - 1) + "C" + 1).textContent;
                 tryWord = document.getElementById("L" + (L - 1) + "C" + 1).textContent.toUpperCase();
                 setCurrentLine(L);
@@ -77,6 +78,7 @@ function writeKey(key) {
                 setSoluce();
                 console.log('perdu');
                 nb_game++;
+                setTimeout(init,2000);
                 return true;
             }
         });
@@ -123,10 +125,10 @@ function constructClavier() {
     }
 }
 function initGame() {
-    C=2;
-    L=1;
+    C = 2;
+    L = 1;
     for (var i = 0; i < dictionnaire[0].length; i++) {
-    goodKey.push(".");
+        goodKey.push(".");
     }
     constructGameTable();
     constructClavier();
@@ -163,6 +165,8 @@ function setCurrentLine(line) {
 }
 
 function setCurrentColumn(col) {
+    if (!document.getElementById("L" + L + "C" + col))
+        return false;
     for (var i = 1; i <= dictionnaire[0].length; i++) {
         if (document.getElementById("L" + (L - 1) + "C" + i)) {
             document.getElementById("L" + (L - 1) + "C" + i).classList.remove("current_column");
@@ -175,13 +179,14 @@ function setCurrentColumn(col) {
 
 function setSoluce() {
     document.getElementById("L" + nb_essai).classList.add("soluce");
-    for (var i = 0; i <= dictionnaire[0].length; i++) {
+    for (var i = 0; i <= dictionnaire[0].length-1; i++) {
+        console.log("dom","L" + nb_essai + "C" + (i + 1), i,  toFind[i]);
         document.getElementById("L" + nb_essai + "C" + (i + 1)).textContent = toFind[i];
     }
 }
 
-function displayScore(){
-    document.getElementById('loading_dico').textContent="mot"+(nb_reussite>1?"s":"")+" trouvé"+(nb_reussite>1?"s":"")+" : "+nb_reussite+"/"+nb_game;
+function displayScore() {
+    document.getElementById('score').textContent = "mot" + (nb_reussite > 1 ? "s" : "") + " trouvé" + (nb_reussite > 1 ? "s" : "") + " : " + nb_reussite + "/" + nb_game;
 }
 
 /*
