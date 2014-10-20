@@ -3,7 +3,8 @@
  var nb_orient=0;
  function orientationChange(e) {
      
-    document.getElementById("version").innerHTML="orientation "+(++nb_orient)+" "+JSON.stringify(e);
+    document.getElementById("version").innerHTML="orientation "+(++nb_orient);
+    if(e) alert(JSON.stringify(e));
 
  }
 
