@@ -62,6 +62,10 @@
 text-transform: capitalize;
 text-align: center;
 margin-top: 13px;
+display:inline-block;
+}
+#tableau{
+    display:inline-block;
 }
 .touches{
 display: inline-block;
