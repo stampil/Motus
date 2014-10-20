@@ -100,7 +100,7 @@ display:inline-block;
 .touches{
 display: inline-block;
 border: 1px solid gray;
-padding: 6px 0px;
+padding: 7px 0px;
 width:45px;
 text-align: center;
 border-radius: 5px;
@@ -108,4 +108,5 @@ background: whitesmoke;
 color: black;
 cursor: pointer;
 box-shadow: 1px 1px 12px #555;
+    margin:2px
 }

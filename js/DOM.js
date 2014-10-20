@@ -37,6 +37,20 @@ function constructGameTable() {
     setCurrentColumn(2);
 }
 
+function jumpKey(){
+    if(goodKey[C-1]!="."){
+        writeKey(goodKey[C-1]);
+    }
+}
+
+function eraseKey(){
+    if(C<=2) return;
+
+    tryWord = tryWord.substr(0,tryWord.length-1);
+    C--;
+    document.getElementById("L" + L + "C" + C).textContent = ".";
+    setCurrentColumn(C);
+}
 function writeKey(key) {
     console.log(L, C, nb_essai);
     if (L > nb_essai) {
@@ -58,7 +72,7 @@ function writeKey(key) {
                 console.log("gagner");
                 nb_reussite++;
                 nb_game++;
-                init();
+                setTimeout(init,1000);
                 return true;
             }
             C = 2;
@@ -145,6 +159,24 @@ function constructClavier() {
         };
         o.appendChild(div);
     }
+    var div = document.createElement("div");
+    div.setAttribute('id', 'touche_back');
+    div.setAttribute('value', '-1');
+    div.setAttribute('class', 'touches');
+    div.textContent = '←';
+    div.onclick = function () {
+        eraseKey();
+    };
+    o.appendChild(div);
+    var div = document.createElement("div");
+    div.setAttribute('id', 'touche_back');
+    div.setAttribute('value', '1');
+    div.setAttribute('class', 'touches');
+    div.textContent = '→';
+    div.onclick = function () {
+        jumpKey();
+    };
+    o.appendChild(div);
 }
 function initGame() {
     C = 2;
@@ -165,6 +197,7 @@ function testTable() {
     else {
         document.getElementById("nb_loaded").textContent = Math.round(inc_dico / dictionnaire.length * 100) + '%';
     }
+    if(Math.round(inc_dico / dictionnaire.length * 100) == 100) document.getElementById("loading_dico").textContent="";
 }
 
 
