@@ -12,7 +12,6 @@
 #game_table td{
     border:1px solid #c5deea;
     padding:0px;
-    height: 41px;
     background: -moz-linear-gradient(top,  #c5deea 0%, #8abbd7 17%, #066dab 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#c5deea), color-stop(17%,#8abbd7), color-stop(100%,#066dab)); /* Chrome,Safari4+ */
     background: -webkit-linear-gradient(top,  #c5deea 0%,#8abbd7 17%,#066dab 100%); /* Chrome10+,Safari5.1+ */
@@ -28,8 +27,8 @@
 
 #game_table td div{
     margin:3px 3px 3px 4px;
-    width: 32px;
-    height: 16px;
+    width: 20px;
+    height: 14px;
     padding: 0 0 15px 0;
 }
 
@@ -59,7 +58,7 @@
 
 }
 #clavier{
-    max-width: 500px;
+    max-width: 291px;
 text-transform: capitalize;
 text-align: center;
 margin-top: 13px;
