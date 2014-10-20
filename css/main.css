@@ -29,6 +29,26 @@ body{
     text-transform: capitalize;
 }
 
+.current_line td{
+    background: -moz-linear-gradient(top,  #8abbd7 0%, #066dab 17%, #033dab 100%) !important; /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8abbd7), color-stop(17%,#066dab), color-stop(100%,#033dab)) !important; /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #8abbd7 0%,#066dab 17%,#033dab 100%) !important; /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #8abbd7 0%,#066dab 17%,#033dab 100%) !important; /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #8abbd7 0%,#066dab 17%,#033dab 100%) !important; /* IE10+ */
+    background: linear-gradient(to bottom,  #8abbd7 0%,#066dab 17%,#033dab 100%) !important; /* W3C */
+}
+
+.soluce td{
+    background: -moz-linear-gradient(top,  rgba(188,15,0,0.81) 0%, rgba(216,7,0,0.36) 100%) !important; /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(188,15,0,0.81)), color-stop(100%,rgba(216,7,0,0.36))) !important; /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(188,15,0,0.81) 0%,rgba(216,7,0,0.36) 100%) !important; /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(188,15,0,0.81) 0%,rgba(216,7,0,0.36) 100%) !important; /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(188,15,0,0.81) 0%,rgba(216,7,0,0.36) 100%) !important; /* IE10+ */
+background: linear-gradient(to bottom,  rgba(188,15,0,0.81) 0%,rgba(216,7,0,0.36) 100%) !important; /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cfbc0f00', endColorstr='#5cd80700',GradientType=0 ) !important; /* IE6-9 */
+
+}
+
 #game_table td div{
     margin:3px 3px 3px 4px;
     width: 25px;
@@ -50,7 +70,7 @@ body{
 
 }
 
-.not_exist{
+.good_placement{
     background: #ff3019; /* Old browsers */
     background: -moz-linear-gradient(top,  #ff3019 0%, #cf0404 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff3019), color-stop(100%,#cf0404)); /* Chrome,Safari4+ */

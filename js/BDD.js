@@ -31,7 +31,7 @@ function onError(e, t) {
     console.error(e, t);
 }
 
-function end_loading(){
+function endLoading(){
     //peut etre appellé plusieurs fois a cause des multiples retour asynchrones
     document.getElementById('loading_dico').style.display="none";
     clearInterval(interval_dico);
@@ -42,7 +42,7 @@ function dicoInserted() {
     ret.textContent ="";
     if(inc_dico>=dictionnaire.length-1){
         //plein de retour asynchrone, les en retards on ne les traitent plus
-        end_loading();
+        endLoading();
         return;
     }
     ret.textContent =dictionnaire[inc_dico];
@@ -54,8 +54,8 @@ function fillTable() {
 
     db.transaction(function (tx) {
         if (inc_dico > dictionnaire.length-1) {
-            end_loading();
-            //console.log("end_loading");
+            endLoading();
+            //console.log("endLoading");
             return;
         }
         if(inc_dico == dictionnaire.length-1 && !last_insert){
