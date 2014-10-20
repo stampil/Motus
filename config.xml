@@ -29,7 +29,6 @@
     <preference name="android-installLocation" value="auto" />
     <plugin name="SplashScreen" value="org.apache.cordova.SplashScreen"/>
     <gap:plugin name="org.apache.cordova.splashscreen" />
-    <gap:plugin name="com.boyvanderlaak.cordova.plugin.orientationchanger" version="0.1.1" />
     <icon src="icon.png" />
     <gap:splash rc="splash.png" />
     <icon gap:density="ldpi" gap:platform="android" src="res/icon/android/icon-36-ldpi.png" />

@@ -1,13 +1,12 @@
  window.addEventListener("orientationchange", orientationChange, true);
 
  var nb_orient=0;
- function orientationChange() {
-     if(window.plugins){
-        var currentOrientation = window.plugins.orientationchanger.getOrientation();
-             document.getElementById("version").innerHTML="orientation "+(++nb_orient)+" "+currentOrientation;
-     }
+ function orientationChange(e) {
+     
+    document.getElementById("version").innerHTML="orientation "+(++nb_orient)+" "+JSON.stringify(e);
+
  }
-orientationChange();
+
 
 function construct_game_table() {
     var o = document.getElementById("tableau");
@@ -75,3 +74,10 @@ function displayWord(line, mot) {
         document.getElementById("L" + line + "C" + 1).innerHTML = mot[0];
     
 }
+
+function light_case(line,column,type){
+    document.getElementById("L" + line + "C" + column).classList.add(type);
+}
+
+light_case(1,4,"not_exist");
+light_case(1,5,"bad_placement");
