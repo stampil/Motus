@@ -24,7 +24,7 @@ function init(){
             console.log("INIT_GAME");
             initGame();
             getWord(1);
-        },29);
+        },501);
         
     });
 }
@@ -85,6 +85,7 @@ function tableCreate() {
         clearInterval(interval_dico);
         interval_dico = null;
     }
+    fillTable();
     interval_dico = setInterval(fillTable, 500);
 }
 
