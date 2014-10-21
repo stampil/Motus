@@ -104,7 +104,7 @@ function validateWord(tryWord, callback){
      if(inc_dico< dictionnaire.length-1){
          //si le dictionnaire n'est pas encore rempli on valide tout les mots rentré ( temporaire aux premieres parties )
          console.log("check validate word tempory disabled : ",inc_dico,dictionnaire.length-1);
-         callback(1);
+         callback(-1);
      }
      db.transaction(function (tx) {
         

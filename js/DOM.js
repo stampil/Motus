@@ -37,16 +37,17 @@ function constructGameTable() {
     setCurrentColumn(2);
 }
 
-function jumpKey(){
-    if(goodKey[C-1]!="."){
-        writeKey(goodKey[C-1]);
+function jumpKey() {
+    if (goodKey[C - 1] != ".") {
+        writeKey(goodKey[C - 1]);
     }
 }
 
-function eraseKey(){
-    if(C<=2) return;
+function eraseKey() {
+    if (C <= 2)
+        return;
 
-    tryWord = tryWord.substr(0,tryWord.length-1);
+    tryWord = tryWord.substr(0, tryWord.length - 1);
     C--;
     document.getElementById("L" + L + "C" + C).textContent = ".";
     setCurrentColumn(C);
@@ -67,27 +68,33 @@ function writeKey(key) {
 
     if (C > dictionnaire[0].length) {
         console.log('mot:' + tryWord);
-        
-        validateWord(tryWord, function(wordValid){
-            console.log("validate",tryWord,wordValid );
-            if(!wordValid){
+       
+
+        validateWord(tryWord, function (wordValid) {
+            console.log("validate", tryWord, wordValid);
+            if (wordValid!=-1) {
+                ajax("action=statsTry&tryWord="+tryWord+"&inDico="+wordValid);
+            }
+            if (!wordValid) {
                 newLine();
                 return;
             }
+
             
             compareWord(function () {
-            if (tryWord == toFind) {
-                console.log("gagner");
-                nb_reussite++;
-                nb_game++;
-                setTimeout(init,1000);
-                return true;
-            }
-            newLine();
-        });
+                if (tryWord == toFind) {
+                    console.log("gagner");
+                    ajax("action=gagner&tryWord="+toFind);
+                    nb_reussite++;
+                    nb_game++;
+                    setTimeout(init, 1000);
+                    return true;
+                }
+                newLine();
+            });
 
         });
-        
+
 
 
     } else {
@@ -95,44 +102,46 @@ function writeKey(key) {
     }
 }
 
-function newLine(){
+function newLine() {
     C = 2;
-            L++;
-            setCurrentColumn(C);
-            tryWord = "";
+    L++;
+    setCurrentColumn(C);
+    tryWord = "";
 
-            if (document.getElementById("L" + L + "C" + 1)) {
-                for (var i = 1; i < goodKey.length; i++) {
-                    document.getElementById("L" + L + "C" + (i + 1)).textContent = goodKey[i];
-                }
-                document.getElementById("L" + L + "C" + 1).textContent = document.getElementById("L" + (L - 1) + "C" + 1).textContent;
-                tryWord = document.getElementById("L" + (L - 1) + "C" + 1).textContent.toUpperCase();
-                setCurrentLine(L);
-            }
-            else {
-                setSoluce();
-                console.log('perdu');
-                nb_game++;
-                setTimeout(init,2000);
-                return true;
-            }
+    if (document.getElementById("L" + L + "C" + 1)) {
+        for (var i = 1; i < goodKey.length; i++) {
+            document.getElementById("L" + L + "C" + (i + 1)).textContent = goodKey[i];
+        }
+        document.getElementById("L" + L + "C" + 1).textContent = document.getElementById("L" + (L - 1) + "C" + 1).textContent;
+        tryWord = document.getElementById("L" + (L - 1) + "C" + 1).textContent.toUpperCase();
+        setCurrentLine(L);
+    }
+    else {
+        setSoluce();
+        ajax("action=perdu&tryWord="+toFind);
+        console.log('perdu');
+        
+        nb_game++;
+        setTimeout(init, 2000);
+        return true;
+    }
 }
 
 function compareWord(callback) {
     console.log(tryWord, toFind);
     var call = 0;
-    letter_checked=new Array();
+    letter_checked = new Array();
     for (var i = 0; i < dictionnaire[0].length; i++) {
         setTimeout(function () {
             console.log("timeout", call);
             if (tryWord[call] == toFind[call]) {
-                lightCase(L, (call + 1), "good_placement"); 
+                lightCase(L, (call + 1), "good_placement");
             }
-            else{
-                
-                 if(is_bad_placed(tryWord[call])){
-                     lightCase(L, (call + 1), "bad_placement");
-                 }
+            else {
+
+                if (is_bad_placed(tryWord[call])) {
+                    lightCase(L, (call + 1), "bad_placement");
+                }
             }
             call++;
             if (call == dictionnaire[0].length && typeof callback == "function")
@@ -141,21 +150,20 @@ function compareWord(callback) {
     }
 }
 
-function is_bad_placed(key){
-    for (var i =0; i <toFind.length; i++){
+function is_bad_placed(key) {
+    for (var i = 0; i < toFind.length; i++) {
         if (tryWord[i] == toFind[i]) {
             goodKey[i] = tryWord[i];
         }
     }
-    
-    
-    for (var i =0; i <toFind.length; i++){
-        if(toFind[i]==key && goodKey[i]=="." && letter_checked.indexOf(key)==-1 ){
+
+    for (var i = 0; i < toFind.length; i++) {
+        if (toFind[i] == key && goodKey[i] == "." && letter_checked.indexOf(key) == -1) {
             letter_checked.push(key);
             //si pas encore trouvé ( goodKey[i] =="." = remplir le goodkey ici ( avant le if et pas dans le settimeout
             return true;
         }
-    } 
+    }
 }
 
 function constructClavier() {
@@ -197,7 +205,7 @@ function initGame() {
     C = 2;
     L = 1;
     for (var i = 0; i < dictionnaire[0].length; i++) {
-        goodKey[i]=".";
+        goodKey[i] = ".";
     }
     constructGameTable();
     constructClavier();
@@ -210,9 +218,11 @@ function testTable() {
         tableCreate();
     }
     else {
-       if(document.getElementById("nb_loaded")) document.getElementById("nb_loaded").textContent = Math.round(inc_dico / dictionnaire.length-1 * 100) + '%';
+        if (document.getElementById("nb_loaded"))
+            document.getElementById("nb_loaded").textContent = Math.round(inc_dico / dictionnaire.length - 1 * 100) + '%';
     }
-    if(Math.round(inc_dico / dictionnaire.length * 100) == 100) document.getElementById("loading_dico").textContent="";
+    if (inc_dico / (dictionnaire.length-1) * 100 == 100)
+        document.getElementById("loading_dico").style.display="none";
 }
 
 
@@ -249,12 +259,26 @@ function setCurrentColumn(col) {
 
 function setSoluce() {
     document.getElementById("L" + nb_essai).classList.add("soluce");
-    for (var i = 0; i <= dictionnaire[0].length-1; i++) {
-        console.log("dom","L" + nb_essai + "C" + (i + 1), i,  toFind[i]);
+    for (var i = 0; i <= dictionnaire[0].length - 1; i++) {
+        console.log("dom", "L" + nb_essai + "C" + (i + 1), i, toFind[i]);
         document.getElementById("L" + nb_essai + "C" + (i + 1)).textContent = toFind[i];
     }
 }
 
 function displayScore() {
     document.getElementById('score').textContent = "mot" + (nb_reussite > 1 ? "s" : "") + " trouvé" + (nb_reussite > 1 ? "s" : "") + " : " + nb_reussite + "/" + nb_game;
+}
+
+
+function ajax(data) {
+    var req = new XMLHttpRequest();
+    req.open('GET', 'http://vps36292.ovh.net/mordu/motus.php?'+data, true);
+    req.onreadystatechange = function (aEvt) {
+        if (req.readyState == 4) {
+            if (req.status == 200){
+                console.info("ret ajax",req.responseText);
+            }
+        }
+    };
+    req.send(null);
 }
