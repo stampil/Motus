@@ -99,3 +99,22 @@ function getWord(line) {
                 );
     }.bind(line));
 }
+
+function validateWord(tryWord, callback){
+     if(inc_dico< dictionnaire.length-1){
+         //si le dictionnaire n'est pas encore rempli on valide tout les mots rentré ( temporaire aux premieres parties )
+         console.log("check validate word tempory disabled : ",inc_dico,dictionnaire.length-1);
+         callback(1);
+     }
+     db.transaction(function (tx) {
+        
+        tx.executeSql(
+                'SELECT count(*) as nb FROM dictionnaire WHERE mot=?',
+                [tryWord.toLowerCase()],
+                function (tx, result) {
+                    callback(result.rows.item(0).nb);
+                }.bind(tryWord),
+                onError
+                );
+    }.bind(tryWord));
+}

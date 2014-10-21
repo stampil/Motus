@@ -67,7 +67,15 @@ function writeKey(key) {
 
     if (C > dictionnaire[0].length) {
         console.log('mot:' + tryWord);
-        compareWord(function () {
+        
+        validateWord(tryWord, function(wordValid){
+            console.log("validate",tryWord,wordValid );
+            if(!wordValid){
+                newLine();
+                return;
+            }
+            
+            compareWord(function () {
             if (tryWord == toFind) {
                 console.log("gagner");
                 nb_reussite++;
@@ -75,7 +83,20 @@ function writeKey(key) {
                 setTimeout(init,1000);
                 return true;
             }
-            C = 2;
+            newLine();
+        });
+
+        });
+        
+
+
+    } else {
+        setCurrentColumn(C);
+    }
+}
+
+function newLine(){
+    C = 2;
             L++;
             setCurrentColumn(C);
             tryWord = "";
@@ -95,12 +116,6 @@ function writeKey(key) {
                 setTimeout(init,2000);
                 return true;
             }
-        });
-
-
-    } else {
-        setCurrentColumn(C);
-    }
 }
 
 function compareWord(callback) {
@@ -195,7 +210,7 @@ function testTable() {
         tableCreate();
     }
     else {
-        document.getElementById("nb_loaded").textContent = Math.round(inc_dico / dictionnaire.length * 100) + '%';
+       if(document.getElementById("nb_loaded")) document.getElementById("nb_loaded").textContent = Math.round(inc_dico / dictionnaire.length-1 * 100) + '%';
     }
     if(Math.round(inc_dico / dictionnaire.length * 100) == 100) document.getElementById("loading_dico").textContent="";
 }
