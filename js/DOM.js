@@ -53,9 +53,7 @@ function eraseKey() {
     setCurrentColumn(C);
 }
 function writeKey(key) {
-    console.log(L, C, nb_essai);
     if (L > nb_essai) {
-        console.log('must wait');
         return;
     }
     if (!document.getElementById("L" + L + "C" + C)) {
@@ -67,11 +65,10 @@ function writeKey(key) {
 
 
     if (C > dictionnaire[0].length) {
-        console.log('mot:' + tryWord);
+
        
 
         validateWord(tryWord, function (wordValid) {
-            console.log("validate", tryWord, wordValid);
             if (wordValid!=-1) {
                 ajax("action=statsTry&tryWord="+tryWord+"&inDico="+wordValid);
             }
@@ -83,7 +80,7 @@ function writeKey(key) {
             
             compareWord(function () {
                 if (tryWord == toFind) {
-                    console.log("gagner");
+
                     ajax("action=gagner&tryWord="+toFind);
                     nb_reussite++;
                     nb_game++;
@@ -119,7 +116,7 @@ function newLine() {
     else {
         setSoluce();
         ajax("action=perdu&tryWord="+toFind);
-        console.log('perdu');
+
         
         nb_game++;
         setTimeout(init, 2000);
@@ -128,12 +125,12 @@ function newLine() {
 }
 
 function compareWord(callback) {
-    console.log(tryWord, toFind);
+
     var call = 0;
     letter_checked = new Array();
     for (var i = 0; i < dictionnaire[0].length; i++) {
         setTimeout(function () {
-            console.log("timeout", call);
+            
             if (tryWord[call] == toFind[call]) {
                 lightCase(L, (call + 1), "good_placement");
             }
@@ -253,14 +250,14 @@ function setCurrentColumn(col) {
         }
         document.getElementById("L" + L + "C" + i).classList.remove("current_column");
     }
-    console.log('setcol', col);
+
     document.getElementById("L" + L + "C" + col).classList.add("current_column");
 }
 
 function setSoluce() {
     document.getElementById("L" + nb_essai).classList.add("soluce");
     for (var i = 0; i <= dictionnaire[0].length - 1; i++) {
-        console.log("dom", "L" + nb_essai + "C" + (i + 1), i, toFind[i]);
+
         document.getElementById("L" + nb_essai + "C" + (i + 1)).textContent = toFind[i];
     }
 }
