@@ -229,9 +229,9 @@ function adaptTablette(){
     }
 }
 
-function valign(){
-    var content_height = document.getElementById('content').offsetHeight;
-    var x = Math.max(0,Math.floor((real.height - content_height )/2));
+function valign(){// height et width sont inversé sur smartphone
+    var content_width = document.getElementById('content').offsetWidth;
+    var x = Math.max(0,Math.floor((real.width - content_width )/2));
     document.getElementById('content').style.marginTop=x+"px";
 }
 
