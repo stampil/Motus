@@ -3,3 +3,5 @@ app.min.*
 .idea/
 .settings/
 nbproject
+res/icon/android/icon-1024.png
+res/icon/android/icon-512.png

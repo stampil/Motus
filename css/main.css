@@ -24,11 +24,7 @@ body{
     background: -o-linear-gradient(top,  #c5deea 0%,#8abbd7 17%,#066dab 100%); /* Opera 11.10+ */
     background: -ms-linear-gradient(top,  #c5deea 0%,#8abbd7 17%,#066dab 100%); /* IE10+ */
     background: linear-gradient(to bottom,  #c5deea 0%,#8abbd7 17%,#066dab 100%); /* W3C */
-    font-size: 1.4em;
-    font-weight: bold;
-    text-align: center;
-    color:whitesmoke;
-    text-transform: capitalize;
+
 }
 
 .current_column{
@@ -60,6 +56,17 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cfbc0f00', e
     width: 25px;
     height: 11px;
     padding: 0 0 15px 0;
+        font-size: 1.4em;
+    font-weight: bold;
+    text-align: center;
+    color:whitesmoke;
+    text-transform: capitalize;
+}
+
+#game_table.tablette td div{
+    width: 34px;
+    height: 21px;
+    font-size: 2em;
 }
 
 .bad_placement{
@@ -111,4 +118,16 @@ color: black;
 cursor: pointer;
 box-shadow: 1px 1px 12px #555;
     margin:2px
+}
+
+#clavier.tablette .touches {
+width: 55px;
+height: 30px;
+padding: 15px 0 0 0;
+margin: 6px;
+}
+
+#clavier.tablette{
+    width: 480px;
+
 }

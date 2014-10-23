@@ -47,7 +47,7 @@ function dicoInserted() {
         endLoading();
         return;
     }
-    ret.textContent =dictionnaire[inc_dico];
+    ret.textContent = Math.round(inc_dico / dictionnaire.length - 1 * 100) + '%';
     inc_dico++;
     cookie.set("inc_dico", inc_dico);
 }
@@ -80,7 +80,7 @@ function fillTable() {
 
 function tableCreate() {
     document.getElementById('loading_dico').style.display = "block";
-    document.getElementById("nb_loaded").textContent = Math.round(inc_dico/dictionnaire.length*100)+'%';
+    document.getElementById("nb_loaded").textContent = Math.round(inc_dico/(dictionnaire.length-1)*100)+'%';
     if(interval_dico){ 
         clearInterval(interval_dico);
         interval_dico = null;

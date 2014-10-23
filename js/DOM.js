@@ -1,3 +1,6 @@
+real.width = window.innerWidth;
+real.height = window.innerHeight;
+
 window.addEventListener("orientationchange", orientationChange, true);
 
 
@@ -198,6 +201,7 @@ function constructClavier() {
     };
     o.appendChild(div);
 }
+
 function initGame() {
     C = 2;
     L = 1;
@@ -206,7 +210,29 @@ function initGame() {
     }
     constructGameTable();
     constructClavier();
+    adaptTablette();
+    valign();
     displayScore();
+}
+
+function adaptTablette(){
+    console.log("adapt",real.width);
+    if(real.width > 600) {
+        console.log('tablette');
+        console.info(document.getElementById('game_table'));
+        document.getElementById('game_table').classList.add("tablette");
+        console.log(document.getElementById('game_table'));
+        document.getElementById('clavier').classList.add("tablette");
+    }
+    else{
+        console.log("pas tablette");
+    }
+}
+
+function valign(){
+    var content_height = document.getElementById('content').offsetHeight;
+    var x = Math.round((real.height - content_height )/2);
+    document.getElementById('content').style.marginTop=x+"px";
 }
 
 
