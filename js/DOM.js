@@ -231,7 +231,7 @@ function adaptTablette(){
 
 function valign(){
     var content_height = document.getElementById('content').offsetHeight;
-    var x = Math.max(0,Math.round((real.height - content_height )/2));
+    var x = Math.max(0,Math.floor((real.height - content_height )/2));
     document.getElementById('content').style.marginTop=x+"px";
 }
 
@@ -242,7 +242,7 @@ function testTable() {
     }
     else {
         if (document.getElementById("nb_loaded"))
-            document.getElementById("nb_loaded").textContent = Math.round(inc_dico / dictionnaire.length - 1 * 100) + '%';
+            document.getElementById("nb_loaded").textContent = Math.floor(inc_dico / dictionnaire.length - 1 * 100) + '%';
     }
     if (inc_dico / (dictionnaire.length-1) * 100 == 100)
         document.getElementById("loading_dico").style.display="none";
