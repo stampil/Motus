@@ -143,7 +143,6 @@ function compareWord(callback) {
 
                 if (is_bad_placed(tryWord[call])) {
                     lightCase(L, (call + 1), "bad_placement");
-                    document.getElementById('beepNotHere').play();
                 }
                 else{
                     //check;
