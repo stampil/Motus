@@ -123,8 +123,9 @@ box-shadow: 1px 1px 12px #555;
 #clavier.tablette .touches {
 width: 55px;
 height: 30px;
-padding: 15px 0 0 0;
+padding: 13px 0 7px 0;
 margin: 6px;
+font-size: 23px;
 }
 
 #clavier.tablette{
