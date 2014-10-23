@@ -231,7 +231,7 @@ function adaptTablette(){
 
 function valign(){
     var content_height = document.getElementById('content').offsetHeight;
-    var x = Math.round((real.height - content_height )/2);
+    var x = Math.max(0,Math.round((real.height - content_height )/2));
     document.getElementById('content').style.marginTop=x+"px";
 }
 

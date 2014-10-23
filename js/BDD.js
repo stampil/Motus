@@ -47,7 +47,7 @@ function dicoInserted() {
         endLoading();
         return;
     }
-    ret.textContent = Math.round(inc_dico / dictionnaire.length - 1 * 100) + '%';
+    ret.textContent = Math.round(inc_dico / (dictionnaire.length - 1) * 100) + '%'+ ' (prise en compte de l\'orthographe à 100%)';
     inc_dico++;
     cookie.set("inc_dico", inc_dico);
 }
