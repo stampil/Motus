@@ -76,7 +76,7 @@ function writeKey(key) {
                 ajax("action=statsTry&tryWord="+tryWord+"&inDico="+wordValid);
             }
             if (!wordValid) {
-                document.getElementById('beepError').play();
+
                 newLine();
                 return;
             }
@@ -137,7 +137,7 @@ function compareWord(callback) {
             
             if (tryWord[call] == toFind[call]) {
                 lightCase(L, (call + 1), "good_placement");
-                document.getElementById('beepGood').play();
+
             }
             else {
 
@@ -146,9 +146,7 @@ function compareWord(callback) {
                     document.getElementById('beepNotHere').play();
                 }
                 else{
-                    document.getElementById('beepCheck').pause();
-                    document.getElementById('beepCheck').currentTime = 0;
-                    document.getElementById('beepCheck').play();
+                    //check;
                 }
             }
             call++;
