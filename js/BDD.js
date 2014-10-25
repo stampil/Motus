@@ -134,95 +134,12 @@ Array.prototype.getUnique = function() {
  return a;
 }
 
-var tab_s = new Array();
-var tab_e = new Array();
-var nvx_mot = new Array();
-function findER(){
-    var nb = 0;
-    
-    
-    for (var i=0; i<dictionnaire.length; i++){
-        if(dictionnaire[i][5]=="e" && dictionnaire[i][6]=="r"){
-            //dictionnaire[i]
-            for (var j=0; j<dictionnaire.length; j++){
-                if(dictionnaire[i][0] == dictionnaire[j][0] &&
-                   dictionnaire[i][1] == dictionnaire[j][1] &&
-                   dictionnaire[i][2] == dictionnaire[j][2] &&
-                   dictionnaire[i][3] == dictionnaire[j][3] &&
-                   dictionnaire[i][4] == dictionnaire[j][4] &&
-                   dictionnaire[i][5] == dictionnaire[j][5]
-                   ){
-                    if(dictionnaire[j][6] == "s"){
-                        tab_s.push(dictionnaire[j]);
-                    console.log(dictionnaire[i],dictionnaire[j]);
-                    }
-                    if(dictionnaire[j][6] == "e"){
-                        tab_e.push(dictionnaire[j]);
-                    }
-                }
-                
-            }
-        }
-    }
-    
-    for (var i=0; i<dictionnaire.length; i++){
 
-        if(dictionnaire[i]=="caloyer" || dictionnaire[i]=="atelier" ||
-           dictionnaire[i]=="barbier" || dictionnaire[i]=="bouvier" ||
-           dictionnaire[i]=="cartier" || dictionnaire[i]=="cellier" ||
-           dictionnaire[i]=="cervier" || dictionnaire[i]=="clavier" ||
-           dictionnaire[i]=="cuiller" || dictionnaire[i]=="dattier" ||
-           dictionnaire[i]=="dentier" || dictionnaire[i]=="dernier" ||
-           dictionnaire[i]=="dossier" || dictionnaire[i]=="ebenier" ||
-           dictionnaire[i]=="ecolier" || dictionnaire[i]=="encrier" ||
-           dictionnaire[i]=="epicier" || dictionnaire[i]=="fermier" ||
-           dictionnaire[i]=="fevrier" || dictionnaire[i]=="fichier" ||
-           dictionnaire[i]=="figuier" || dictionnaire[i]=="foncier" ||
-           dictionnaire[i]=="freezer" || dictionnaire[i]=="glacier" ||
-           dictionnaire[i]=="grenier" || dictionnaire[i]=="janvier" ||
-           dictionnaire[i]=="lainier" || dictionnaire[i]=="laitier" ||
-           dictionnaire[i]=="madrier" || dictionnaire[i]=="metayer" ||
-           dictionnaire[i]=="meunier" || dictionnaire[i]=="millier" ||
-           dictionnaire[i]=="mortier" || dictionnaire[i]=="olivier" ||
-           dictionnaire[i]=="ouvrier" || dictionnaire[i]=="palmier" ||
-           dictionnaire[i]=="poirier" || dictionnaire[i]=="pommier" ||
-           dictionnaire[i]=="pompier" || dictionnaire[i]=="portier" ||
-           dictionnaire[i]=="premier" || dictionnaire[i]=="prunier" ||
-           dictionnaire[i]=="routier" || dictionnaire[i]=="sentier" ||
-           dictionnaire[i]=="skipper" || dictionnaire[i]=="sorcier" ||
-           dictionnaire[i]=="soulier" || dictionnaire[i]=="speaker" ||
-           dictionnaire[i]=="sucrier" || dictionnaire[i]=="tablier" ||
-           dictionnaire[i]=="terrier" || dictionnaire[i]=="verdier" ||
-           dictionnaire[i]=="voilier" || dictionnaire[i]=="usurier" ||
-           dictionnaire[i]=="herbier" || dictionnaire[i]=="usurier" ||
-           
-           dictionnaire[i]=="collier" || dictionnaire[i]=="cordier"
-           ){
-            continue;
-        }
-        
-        if(dictionnaire[i][5]=="e" && dictionnaire[i][6]=="r"){
-  
-            var motS = dictionnaire[i][0]+dictionnaire[i][1]+dictionnaire[i][2]+dictionnaire[i][3]+dictionnaire[i][4]+dictionnaire[i][5]+"s";
-            if(tab_s.indexOf(motS)==-1){
-                nvx_mot.push(motS);
-            }
-            var motE = dictionnaire[i][0]+dictionnaire[i][1]+dictionnaire[i][2]+dictionnaire[i][3]+dictionnaire[i][4]+dictionnaire[i][5]+"e";
-            if(tab_e.indexOf(motE)==-1){
-                if(dictionnaire[i]=="charter" || dictionnaire[i] =="gaucher" || dictionnaire[i] =="gravier" || dictionnaire[i] =="voyager"){
-                    continue;
-                }
-                nvx_mot.push(motE);
-            }
-        }
-    }
-    
-    document.getElementById("version").innerHTML = '"'+nvx_mot.join('","')+'"';
-
-    console.log(tab_s,tab_e,nvx_mot);
-}
 
 for (var i=0; i<dictionnaire.length; i++){
-    if(dictionnaire[i].length !=7) console.error("erreur dico !!!",dictionnaire[i]);
+    if(dictionnaire[i].length !=7) console.error("erreur length dico !!!",dictionnaire[i]);
+    if(dictionnaire.indexOf(dictionnaire[i]) != dictionnaire.lastIndexOf(dictionnaire[i])){
+        console.error("erreur multi-occurence dico !!!",dictionnaire[i]);
+    }
     
 }
