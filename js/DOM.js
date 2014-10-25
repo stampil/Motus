@@ -47,7 +47,7 @@ Array.prototype.getUnique = function () {
 for (var i = 0; i < dictionnaire.length; i++) {
     if (dictionnaire[i].length != 7) console.error("erreur length dico !!!", dictionnaire[i]);
     if (dictionnaire.indexOf(dictionnaire[i]) != dictionnaire.lastIndexOf(dictionnaire[i])) {
-        console.error("erreur multi-occurence dico !!!", dictionnaire[i]);
+        console.info("erreur multi-occurence dico !!!", dictionnaire[i]);
     }
 
 }
@@ -342,3 +342,9 @@ function ajax(data) {
 }
 
 init();
+/*
+document.getElementById('version').innerHTML='';
+for(var i=13104; i<dico.length; i++){
+    console.log(i,dico[i].Mot);
+    document.getElementById('version').innerHTML+='"'+dico[i].Mot.toUpperCase()+'",';
+}*/
