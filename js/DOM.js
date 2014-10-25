@@ -43,13 +43,14 @@ Array.prototype.getUnique = function () {
     return a;
 }
 
-
+function check_table(){
 for (var i = 0; i < dictionnaire.length; i++) {
     if (dictionnaire[i].length != 7) console.error("erreur length dico !!!", dictionnaire[i]);
     if (dictionnaire.indexOf(dictionnaire[i]) != dictionnaire.lastIndexOf(dictionnaire[i])) {
-        console.info("erreur multi-occurence dico !!!", dictionnaire[i]);
+        console.error("erreur multi-occurence dico !!!", dictionnaire[i]);
     }
 
+}
 }
 
 function orientationChange() {
