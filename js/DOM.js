@@ -25,8 +25,8 @@ function getWord(line) {
 
 function validateWord(tryWord) {
 
-    if (dictionnaire.indexOf(tryWord) != -1) return true;
-    return false;
+    if (dictionnaire.indexOf(tryWord) != -1) return 1;
+    return 0;
 
 }
 
