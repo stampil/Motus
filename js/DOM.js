@@ -3,6 +3,54 @@ real.height = window.innerHeight;
 
 window.addEventListener("orientationchange", orientationChange, true);
 
+console.log("start", new Date().getTime());
+
+
+//console.log('si on met une instruction db.transaction ici, db à de forte chance de ne pas encore existé, à ce temps là: ',new Date().getTime());
+
+function init() {
+
+    console.log("INIT_GAME");
+    initGame();
+    getWord(1);
+
+}
+
+
+function getWord(line) {
+    console.log("getWord call", line, new Date().getTime());
+
+    displayWord(line, dictionnaire[Math.round(Math.random() * (dictionnaire.length - 1))]);
+}
+
+function validateWord(tryWord) {
+
+    if (dictionnaire.indexOf(tryWord) != -1) return true;
+    return false;
+
+}
+
+Array.prototype.getUnique = function () {
+    var o = {}, a = [], i, e;
+    for (i = 0; e = this[i]; i++) {
+        o[e] = 1
+    }
+    ;
+    for (e in o) {
+        a.push(e)
+    }
+    ;
+    return a;
+}
+
+
+for (var i = 0; i < dictionnaire.length; i++) {
+    if (dictionnaire[i].length != 7) console.error("erreur length dico !!!", dictionnaire[i]);
+    if (dictionnaire.indexOf(dictionnaire[i]) != dictionnaire.lastIndexOf(dictionnaire[i])) {
+        console.error("erreur multi-occurence dico !!!", dictionnaire[i]);
+    }
+
+}
 
 function orientationChange() {
     var orientation = "portrait";
@@ -69,33 +117,27 @@ function writeKey(key) {
 
     if (C > dictionnaire[0].length) {
 
-       
+        var valid = validateWord(tryWord);
+        ajax("action=statsTry&tryWord=" + tryWord + "&inDico=" + valid);
 
-        validateWord(tryWord, function (wordValid) {
-            if (wordValid!=-1) {
-                ajax("action=statsTry&tryWord="+tryWord+"&inDico="+wordValid);
+
+        if (!valid) {
+            newLine();
+            return;
+        }
+
+
+        compareWord(function () {
+            if (tryWord == toFind) {
+
+                ajax("action=gagner&tryWord=" + toFind);
+                nb_reussite++;
+                nb_game++;
+                setTimeout(init, 1000);
+                return true;
             }
-            if (!wordValid) {
-
-                newLine();
-                return;
-            }
-
-            
-            compareWord(function () {
-                if (tryWord == toFind) {
-
-                    ajax("action=gagner&tryWord="+toFind);
-                    nb_reussite++;
-                    nb_game++;
-                    setTimeout(init, 1000);
-                    return true;
-                }
-                newLine();
-            });
-
+            newLine();
         });
-
 
 
     } else {
@@ -119,9 +161,9 @@ function newLine() {
     }
     else {
         setSoluce();
-        ajax("action=perdu&tryWord="+toFind);
+        ajax("action=perdu&tryWord=" + toFind);
 
-        
+
         nb_game++;
         setTimeout(init, 2000);
         return true;
@@ -134,7 +176,7 @@ function compareWord(callback) {
     letter_checked = new Array();
     for (var i = 0; i < dictionnaire[0].length; i++) {
         setTimeout(function () {
-            
+
             if (tryWord[call] == toFind[call]) {
                 lightCase(L, (call + 1), "good_placement");
 
@@ -144,7 +186,7 @@ function compareWord(callback) {
                 if (is_bad_placed(tryWord[call])) {
                     lightCase(L, (call + 1), "bad_placement");
                 }
-                else{
+                else {
                     //check;
                 }
             }
@@ -220,38 +262,26 @@ function initGame() {
     displayScore();
 }
 
-function adaptTablette(){
-    console.log("adapt",real.width);
-    if(real.width > 600) {
+function adaptTablette() {
+    console.log("adapt", real.width);
+    if (real.width > 600) {
         console.log('tablette');
         console.info(document.getElementById('game_table'));
         document.getElementById('game_table').classList.add("tablette");
         console.log(document.getElementById('game_table'));
         document.getElementById('clavier').classList.add("tablette");
     }
-    else{
+    else {
         console.log("pas tablette");
     }
 }
 
-function valign(){// height et width sont inversé sur smartphone
+function valign() {// height et width sont inversé sur smartphone
     var content_width = document.getElementById('content').offsetWidth;
-    var x = Math.max(0,Math.floor((real.width - content_width )/2));
-    document.getElementById('content').style.marginTop=x+"px";
+    var x = Math.max(0, Math.floor((real.width - content_width ) / 2));
+    document.getElementById('content').style.marginTop = x + "px";
 }
 
-
-function testTable() {
-    if (inc_dico < dictionnaire.length - 1) {
-        tableCreate();
-    }
-    else {
-        if (document.getElementById("nb_loaded"))
-            document.getElementById("nb_loaded").textContent = Math.floor(inc_dico / dictionnaire.length - 1 * 100) + '%';
-    }
-    if (inc_dico / (dictionnaire.length-1) * 100 == 100)
-        document.getElementById("loading_dico").style.display="none";
-}
 
 
 function displayWord(line, mot) {
@@ -300,13 +330,15 @@ function displayScore() {
 
 function ajax(data) {
     var req = new XMLHttpRequest();
-    req.open('GET', 'http://vps36292.ovh.net/mordu/motus.php?'+data, true);
+    req.open('GET', 'http://vps36292.ovh.net/mordu/motus.php?' + data, true);
     req.onreadystatechange = function (aEvt) {
         if (req.readyState == 4) {
-            if (req.status == 200){
-                console.info("ret ajax",req.responseText);
+            if (req.status == 200) {
+                console.info("ret ajax", req.responseText);
             }
         }
     };
     req.send(null);
 }
+
+init();

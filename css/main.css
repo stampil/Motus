@@ -3,10 +3,7 @@ body{
     background: #B6D1EA;
 
 }
-#loading_dico{
-    display:block;
-    margin-top: 8px;
-}
+
 #game_table{
     border:1px solid #c5deea;
     border-spacing : 0;
@@ -131,4 +128,8 @@ font-size: 23px;
 #clavier.tablette{
     width: 480px;
 
+}
+
+#score{
+    margin-top:10px;
 }
