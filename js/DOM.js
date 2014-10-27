@@ -16,10 +16,10 @@ function EmulMedia(url){
 }
 
 if(typeof Media !="undefined"){
-    beepCheck = new Media("sound/beepCheck.mp3",null,null);
-    beepError = new Media("sound/beepError.ogg",null,null);
-    beepGood = new Media("sound/beepGood.wav",null,null);
-    beepNotHere = new Media("sound/beepNotHere.mp3",null,null);
+    beepCheck = new Media("/android_asset/www/res/raw/beepCheck.mp3",null,null);
+    beepError = new Media("android.resource://com.eckume.motus/raw/beepError.mp3",null,null);
+    beepGood = new Media("android.resource://com.eckume.motus/raw/beepGood.wav",null,null);
+    beepNotHere = new Media("android.resource://com.eckume.motus/raw/beepNotHere.mp3",null,null);
 }
 else{
     beepCheck = new EmulMedia(document.getElementById('beepCheck'));
@@ -87,9 +87,7 @@ function orientationChange() {
     else {
         document.getElementById("clavier").style.width = "260px";
     }
-
 }
-
 
 function constructGameTable() {
     var o = document.getElementById("tableau");
@@ -139,7 +137,6 @@ function writeKey(key) {
     tryWord += key;
     C++;
 
-
     if (C > dictionnaire[0].length) {
 
         var valid = validateWord(tryWord);
@@ -152,7 +149,6 @@ function writeKey(key) {
             newLine();
             return;
         }
-
 
         compareWord(function () {
             if (tryWord == toFind) {
