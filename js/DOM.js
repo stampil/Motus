@@ -12,10 +12,11 @@ function EmulMedia(url){
     this.seekTo = function(to){
         url.currentTime=to;
     };
+
 }
 
 if(typeof Media !="undefined"){
-    beepCheck = new Media("/android_asset/www/sound/beepCheck.mp3",null,null);
+    beepCheck = new Media("sound/beepCheck.mp3",null,null);
     beepError = new Media("sound/beepError.ogg",null,null);
     beepGood = new Media("sound/beepGood.wav",null,null);
     beepNotHere = new Media("sound/beepNotHere.mp3",null,null);
