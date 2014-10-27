@@ -5,6 +5,26 @@ window.addEventListener("orientationchange", orientationChange, true);
 
 console.log("start", new Date().getTime());
 
+/*function EmulMedia(url){
+    this.play = function(){
+        console.info('beep '+url);
+    };
+}*/
+
+if(typeof Media !="undefined"){
+    beepCheck = new Media("sound/beepCheck.mp3",
+                // success callback
+                 function () { console.log("playAudio():Audio Success"); },
+                // error callback
+                 function (err) { console.log("playAudio():Audio Error: " + err); }
+    );
+}
+else{
+    //beepCheck = new EmulMedia("sound/beepCheck.mp3");
+    beepCheck = document.getElementById('beepCheck');
+}
+
+
 
 //console.log('si on met une instruction db.transaction ici, db à de forte chance de ne pas encore existé, à ce temps là: ',new Date().getTime());
 
@@ -188,6 +208,7 @@ function compareWord(callback) {
                     lightCase(L, (call + 1), "bad_placement");
                 }
                 else {
+                    beepCheck.play();
                     //check;
                 }
             }
@@ -343,6 +364,8 @@ function ajax(data) {
 }
 
 init();
+
+
 /*
 document.getElementById('version').innerHTML='';
 for(var i=13104; i<dico.length; i++){
