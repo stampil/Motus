@@ -16,7 +16,7 @@ function EmulMedia(url){
 }
 
 if(typeof Media !="undefined"){
-    beepCheck = new Media("/android_asset/www/res/raw/beepCheck.mp3",null,null);
+    beepCheck = new Media("android.resource://com.eckume.motus/raw/beepCheck.mp3",null,null);
     beepError = new Media("android.resource://com.eckume.motus/raw/beepError.mp3",null,null);
     beepGood = new Media("android.resource://com.eckume.motus/raw/beepGood.wav",null,null);
     beepNotHere = new Media("android.resource://com.eckume.motus/raw/beepNotHere.mp3",null,null);
