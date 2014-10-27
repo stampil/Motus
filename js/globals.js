@@ -17,6 +17,7 @@ var real ={"width":0,"height":0};
 var C=2;
 var L=1;
 
-var beepCheck={};
-var beepError={};
-var beepGood={};
+var beepCheck;
+var beepError;
+var beepGood;
+var beepNotHere;

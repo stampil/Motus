@@ -5,23 +5,26 @@ window.addEventListener("orientationchange", orientationChange, true);
 
 console.log("start", new Date().getTime());
 
-/*function EmulMedia(url){
+function EmulMedia(url){
     this.play = function(){
-        console.info('beep '+url);
+        url.play();
     };
-}*/
+    this.seekTo = function(to){
+        url.currentTime=to;
+    };
+}
 
 if(typeof Media !="undefined"){
-    beepCheck = new Media("sound/beepCheck.mp3",
-                // success callback
-                 function () { console.log("playAudio():Audio Success"); },
-                // error callback
-                 function (err) { console.log("playAudio():Audio Error: " + err); }
-    );
+    beepCheck = new Media("/android_asset/www/sound/beepCheck.mp3",null,null);
+    beepError = new Media("sound/beepError.ogg",null,null);
+    beepGood = new Media("sound/beepGood.wav",null,null);
+    beepNotHere = new Media("sound/beepNotHere.mp3",null,null);
 }
 else{
-    //beepCheck = new EmulMedia("sound/beepCheck.mp3");
-    beepCheck = document.getElementById('beepCheck');
+    beepCheck = new EmulMedia(document.getElementById('beepCheck'));
+    beepError = new EmulMedia(document.getElementById('beepError'));
+    beepGood = new EmulMedia(document.getElementById('beepGood'));
+    beepNotHere = new EmulMedia(document.getElementById('beepNotHere'));
 }
 
 
@@ -143,6 +146,8 @@ function writeKey(key) {
 
 
         if (!valid) {
+            beepError.seekTo(0);
+            beepError.play();
             newLine();
             return;
         }
@@ -199,15 +204,20 @@ function compareWord(callback) {
         setTimeout(function () {
 
             if (tryWord[call] == toFind[call]) {
+                beepGood.seekTo(0);
+                beepGood.play();
                 lightCase(L, (call + 1), "good_placement");
 
             }
             else {
 
                 if (is_bad_placed(tryWord[call])) {
+                    beepNotHere.seekTo(0);
+                    beepNotHere.play();
                     lightCase(L, (call + 1), "bad_placement");
                 }
                 else {
+                    beepCheck.currentTime=0;
                     beepCheck.play();
                     //check;
                 }
