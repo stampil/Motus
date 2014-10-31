@@ -7,15 +7,17 @@ console.log("start", new Date().getTime());
 
 function EmulMedia(url){
     this.play = function(){
+        return false;
         url.play();
     };
     this.seekTo = function(to){
+        return false;
         url.currentTime=to;
     };
 
 }
 
-if(typeof Media !="undefined"){
+/*if(typeof Media !="undefined"){
     beepCheck = new Media("/android_asset/www/res/raw/beepCheck.mp3",null,null);
     beepError = new Media("/android_asset/www/res/raw/beepError.mp3",null,null);
     beepGood = new Media("/android_asset/www/res/raw/beepGood.wav",null,null);
@@ -26,8 +28,11 @@ else{
     beepError = new EmulMedia(document.getElementById('beepError'));
     beepGood = new EmulMedia(document.getElementById('beepGood'));
     beepNotHere = new EmulMedia(document.getElementById('beepNotHere'));
-}
-
+}*/
+beepCheck = new EmulMedia(document.getElementById('beepCheck'));
+beepError = new EmulMedia(document.getElementById('beepError'));
+beepGood = new EmulMedia(document.getElementById('beepGood'));
+beepNotHere = new EmulMedia(document.getElementById('beepNotHere'));
 
 
 //console.log('si on met une instruction db.transaction ici, db à de forte chance de ne pas encore existé, à ce temps là: ',new Date().getTime());
@@ -49,7 +54,7 @@ function getWord(line) {
 
 function validateWord(tryWord) {
 
-    if (dictionnaire.indexOf(tryWord) != -1) return 1;
+    if (dictionnaire.indexOf(tryWord) != -1 || dictionnaire_dur.indexOf(tryWord) != -1) return 1;
     return 0;
 
 }
