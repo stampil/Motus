@@ -2,7 +2,7 @@ real.width = window.innerWidth;
 real.height = window.innerHeight;
 
 window.addEventListener("orientationchange", orientationChange, true);
-
+lengthWord= dictionnaire[0].Mot.length;
 console.log("start", new Date().getTime());
 
 function EmulMedia(url){
@@ -47,14 +47,18 @@ function init() {
 
 
 function getWord(line) {
-    console.log("getWord call", line, new Date().getTime());
-
-    displayWord(line, dictionnaire[Math.round(Math.random() * (dictionnaire.length - 1))]);
+    var random = Math.round(Math.random() * (dictionnaire.length - 1));
+    if(dictionnaire[random].Dur != 1){
+        getWord(line);
+        return;
+    }
+    displayWord(line, dictionnaire[random].Mot);
+    return;
 }
 
 function validateWord(tryWord) {
 
-    if (dictionnaire.indexOf(tryWord) != -1 || dictionnaire_dur.indexOf(tryWord) != -1) return 1;
+    if (searchDico(tryWord) != -1) return 1;
     return 0;
 
 }
@@ -72,10 +76,10 @@ Array.prototype.getUnique = function () {
     return a;
 }
 
-function check_table(){
+function checkTable(){
 for (var i = 0; i < dictionnaire.length; i++) {
-    if (dictionnaire[i].length != 7) console.error("erreur length dico !!!", dictionnaire[i]);
-    if (dictionnaire.indexOf(dictionnaire[i]) != dictionnaire.lastIndexOf(dictionnaire[i])) {
+    if (dictionnaire[i].Mot.length != 7) console.error("erreur length dico !!!", dictionnaire[i].Mot);
+    if (checkOccurence(dictionnaire[i].Mot)>1) {
         console.error("erreur multi-occurence dico !!!", dictionnaire[i]);
     }
 
@@ -103,7 +107,7 @@ function constructGameTable() {
     for (var i = 0; i < nb_essai; i++) {
         var tr = document.createElement('tr');
         tr.setAttribute("id", "L" + (i + 1));
-        for (var j = 0; j < dictionnaire[0].length; j++) {
+        for (var j = 0; j < lengthWord; j++) {
             var td = document.createElement('td');
             var div = document.createElement('div');
             div.setAttribute('id', 'L' + (i + 1) + 'C' + (j + 1));
@@ -142,7 +146,7 @@ function writeKey(key) {
     tryWord += key;
     C++;
 
-    if (C > dictionnaire[0].length) {
+    if (C > lengthWord) {
 
         var valid = validateWord(tryWord);
         ajax("action=statsTry&tryWord=" + tryWord + "&inDico=" + valid);
@@ -202,7 +206,7 @@ function compareWord(callback) {
 
     var call = 0;
     letter_checked = new Array();
-    for (var i = 0; i < dictionnaire[0].length; i++) {
+    for (var i = 0; i < lengthWord; i++) {
         setTimeout(function () {
 
             if (tryWord[call] == toFind[call]) {
@@ -225,7 +229,7 @@ function compareWord(callback) {
                 }
             }
             call++;
-            if (call == dictionnaire[0].length && typeof callback == "function")
+            if (call == lengthWord && typeof callback == "function")
                 callback();
         }, 500 * i);
     }
@@ -286,7 +290,7 @@ function constructClavier() {
 function initGame() {
     C = 2;
     L = 1;
-    for (var i = 0; i < dictionnaire[0].length; i++) {
+    for (var i = 0; i < lengthWord; i++) {
         goodKey[i] = ".";
     }
     constructGameTable();
@@ -297,12 +301,10 @@ function initGame() {
 }
 
 function adaptTablette() {
-    console.log("adapt", real.width);
+
     if (real.width > 600) {
-        console.log('tablette');
-        console.info(document.getElementById('game_table'));
+        console.log('tablette',real);
         document.getElementById('game_table').classList.add("tablette");
-        console.log(document.getElementById('game_table'));
         document.getElementById('clavier').classList.add("tablette");
     }
     else {
@@ -339,7 +341,7 @@ function setCurrentLine(line) {
 function setCurrentColumn(col) {
     if (!document.getElementById("L" + L + "C" + col))
         return false;
-    for (var i = 1; i <= dictionnaire[0].length; i++) {
+    for (var i = 1; i <= lengthWord; i++) {
         if (document.getElementById("L" + (L - 1) + "C" + i)) {
             document.getElementById("L" + (L - 1) + "C" + i).classList.remove("current_column");
         }
@@ -351,7 +353,7 @@ function setCurrentColumn(col) {
 
 function setSoluce() {
     document.getElementById("L" + nb_essai).classList.add("soluce");
-    for (var i = 0; i <= dictionnaire[0].length - 1; i++) {
+    for (var i = 0; i <= lengthWord - 1; i++) {
 
         document.getElementById("L" + nb_essai + "C" + (i + 1)).textContent = toFind[i];
     }
@@ -377,10 +379,22 @@ function ajax(data) {
 
 init();
 
+function searchDico(word){
+    return arrayObjectIndexOf(dictionnaire, word, 'Mot');
+}
 
-/*
-document.getElementById('version').innerHTML='';
-for(var i=13104; i<dico.length; i++){
-    console.log(i,dico[i].Mot);
-    document.getElementById('version').innerHTML+='"'+dico[i].Mot.toUpperCase()+'",';
-}*/
+function checkOccurence(word){
+    var occ = 0;
+    for(var i = 0, len = dictionnaire.length; i < len; i++) {
+        if (dictionnaire[i].Mot === word) occ++;
+    }
+    return occ;
+}
+
+function arrayObjectIndexOf(myArray, searchTerm, property) {
+    for(var i = 0, len = myArray.length; i < len; i++) {
+        if (myArray[i][property] === searchTerm) return i;
+    }
+    return -1;
+}
+
