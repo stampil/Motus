@@ -1,9 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.eckume.motus" version="1.4.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.eckume.motus" version="1.4.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <preference name="phonegap-version" value="3.6.3" />
     <name>MOTUSFR</name>
     <description>
-        A FAN MOTUS IN FR
+        Jeu MOTUS ( lingo ) non officiel, 
+        je vous propose d'y jouer avec un dictionnaire FR.
     </description>
     <author email="developpeurntic@gmail.com" href="http://www.starpirates.fr">
         Detrios
