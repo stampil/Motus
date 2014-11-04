@@ -295,22 +295,11 @@ function initGame() {
     }
     constructGameTable();
     constructClavier();
-    adaptTablette();
     valign();
     displayScore();
 }
 
-function adaptTablette() {
 
-    if (real.width > 600) {
-        console.log('tablette',real);
-        document.getElementById('game_table').classList.add("tablette");
-        document.getElementById('clavier').classList.add("tablette");
-    }
-    else {
-        console.log("pas tablette");
-    }
-}
 
 function valign() {// height et width sont inversé sur smartphone
     var content_width = document.getElementById('content').offsetWidth;
