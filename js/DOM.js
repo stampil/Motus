@@ -49,7 +49,7 @@ function playAudio(uri) {
     var url = getPhoneGapPath()+ uri;
     var my_media = new Media(url,
             // success callback
-             function () {  },
+             function () { my_media.release() },
             // error callback
              function (err) { document.getElementById('version').textContent=err; }
     );
