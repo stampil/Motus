@@ -6,7 +6,7 @@ lengthWord= dictionnaire[0].Mot.length;
 console.log("start", new Date().getTime());
 
 document.addEventListener('deviceready', function() {
-    is_mobile=true;
+  is_mobile=true;
   navigator.splashscreen.hide();
 });
 
@@ -31,7 +31,6 @@ function EmulMedia(url){
         dom.play();
     };
     this.seekTo = function(to){
-        console.log('seekTo',dom,to);
         if(is_mobile){//mobile
             return false;
         }
@@ -50,7 +49,7 @@ function playAudio(uri) {
     var url = getPhoneGapPath()+ uri;
     var my_media = new Media(url,
             // success callback
-             function () { document.getElementById('version').textContent='audio '+url+' success'; },
+             function () {  },
             // error callback
              function (err) { document.getElementById('version').textContent=err; }
     );
