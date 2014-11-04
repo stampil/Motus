@@ -9,95 +9,77 @@ document.addEventListener('deviceready', function() {
   navigator.splashscreen.hide();
 });
 
-window.onload = initSound;
 
-function BufferLoader(context, urlList, callback) {
-  this.context = context;
-  this.urlList = urlList;
-  this.onload = callback;
-  this.bufferList = new Array();
-  this.loadCount = 0;
-}
-
-BufferLoader.prototype.loadBuffer = function(url, index) {
-  // Load buffer asynchronously
-  var request = new XMLHttpRequest();
-  request.open("GET", url, true);
-  request.responseType = "arraybuffer";
-
-  var loader = this;
-
-  request.onload = function() {
-    // Asynchronously decode the audio file data in request.response
-    loader.context.decodeAudioData(
-      request.response,
-      function(buffer) {
-        if (!buffer) {
-          alert('error decoding file data: ' + url);
-          return;
-        }
-        loader.bufferList[index] = buffer;
-        if (++loader.loadCount == loader.urlList.length)
-          loader.onload(loader.bufferList);
-      },
-      function(error) {
-        console.error('decodeAudioData error', error);
-      }
-    );
-  }
-
-  request.onerror = function() {
-    alert('BufferLoader: XHR error');
-  }
-
-  request.send();
-}
-
-BufferLoader.prototype.load = function() {
-  for (var i = 0; i < this.urlList.length; ++i)
-  this.loadBuffer(this.urlList[i], i);
-}
-
-
-function initSound() {
-  // Fix up prefixing
-  window.AudioContext = window.AudioContext || window.webkitAudioContext;
-  context = new AudioContext();
-
-  bufferLoader = new BufferLoader(
-    context,
-    [
-      'res/raw/beepGood.wav',
-      'res/raw/beepCheck.mp3',
-      'res/raw/beepError.ogg',
-      'res/raw/beepNotHere.mp3',
-    ],
-    finishedLoading
-    );
-
-  bufferLoader.load();
-}
-
-
-
-function finishedLoading(bufferList) {
-  BUFFER = bufferList;
-  
-}
-
-function playSound(id_sound) {
-    if(typeof context=="undefined"){
-        console.error('sound '+id_sound+' not initialized');
-        return;
+function EmulMedia(url){
+    
+    var dom;
+    var EmulMedia = function(url){
+        dom = document.createElement('audio');
+        var source = document.createElement('source');
+        source.setAttribute("src","res/raw/"+url);
+        source.setAttribute("type","audio/"+url.split('.')[1]);
+        dom.appendChild(source);
+        console.log('EmulMedia',dom, dom.duration);
+        
     }
-  var source = context.createBufferSource();
-  source.buffer = BUFFER[id_sound];
-  source.connect(context.destination);
-  source.start(0);
+    EmulMedia(url);
+    
+    this.play = function(){
+        if(typeof window.plugins !="undefined"){//mobile
+            return false;
+        }
+        dom.play();
+    };
+    this.seekTo = function(to){
+        console.log('seekTo',dom,to);
+        if(typeof window.plugins !="undefined"){//mobile
+            return false;
+        }
+        if(dom.duration)  dom.currentTime=to;
+    };
+
 }
 
 
+beepCheck = new EmulMedia('beepCheck.mp3');
+beepError = new EmulMedia('beepError.mp3');
+beepGood = new EmulMedia('beepGood.wav');
+beepNotHere = new EmulMedia('beepNotHere.mp3');
 
+var media = {
+    'music': 'res/raw/beepCheck.mp3',
+    'click': 'res/raw/beepGood.wav'
+};
+if( window.plugins && window.plugins.LowLatencyAudio ) {
+    var lla = window.plugins.LowLatencyAudio;
+
+    // preload audio resource
+    lla.preloadAudio( 'music', media['music'], 1, 1, function(msg){
+    }, function(msg){
+        console.log( 'error: ' + msg );
+    });
+
+    lla.preloadFX( 'click', media['click'], function(msg){
+    }, function(msg){
+        console.log( 'error: ' + msg );
+    });
+
+    // now start playing
+    lla.play( 'click' );
+    lla.loop( 'music' );
+
+    // stop after 1 min 
+    window.setTimeout( function(){
+        //lla.stop( 'click' );
+        lla.stop( 'music' );
+
+        lla.unload( 'music' );
+        lla.unload( 'click' );
+    }, 1000 * 60 );
+}
+
+
+//console.log('si on met une instruction db.transaction ici, db à de forte chance de ne pas encore existé, à ce temps là: ',new Date().getTime());
 
 function init() {
 
@@ -206,7 +188,8 @@ function writeKey(key) {
 
 
         if (!valid) {
-            playSound(beepError);
+            beepError.seekTo(0);
+            beepError.play();
             newLine();
             return;
         }
@@ -262,18 +245,22 @@ function compareWord(callback) {
         setTimeout(function () {
 
             if (tryWord[call] == toFind[call]) {
-                playSound(beepGood);
+                beepGood.seekTo(0);
+                beepGood.play();
                 lightCase(L, (call + 1), "good_placement");
 
             }
             else {
 
                 if (is_bad_placed(tryWord[call])) {
-                    playSound(beepNotHere);
+                    beepNotHere.seekTo(0);
+                    beepNotHere.play();
                     lightCase(L, (call + 1), "bad_placement");
                 }
                 else {
-                    playSound(beepCheck);
+                    beepCheck.currentTime=0;
+                    beepCheck.play();
+                    //check;
                 }
             }
             call++;

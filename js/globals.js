@@ -17,15 +17,10 @@ var real ={"width":0,"height":0};
 var lengthWord=-1;
 var version="1.4.4";
 
-
-var context;
-var bufferLoader;
-var BUFFER;
-
 var C=2;
 var L=1;
 
-var beepGood=0;
-var beepCheck=1;
-var beepError=2;
-var beepNotHere=3;
+var beepCheck;
+var beepError;
+var beepGood;
+var beepNotHere;
