@@ -19,9 +19,7 @@ function EmulMedia(url){
         var source = document.createElement('source');
         source.setAttribute("src","res/raw/"+url);
         source.setAttribute("type","audio/"+url.split('.')[1]);
-        dom.appendChild(source);
-        console.log('EmulMedia',dom, dom.duration);
-        
+        dom.appendChild(source);      
     }
     EmulMedia(url);
     
@@ -405,3 +403,11 @@ function arrayObjectIndexOf(myArray, searchTerm, property) {
     return -1;
 }
 
+function getPhoneGapPath() {
+
+    var path = window.location.pathname;
+    path = path.substr( path, path.length - 10 );
+    return 'file://' + path;
+
+};
+document.getElementById('version').textContent=getPhoneGapPath();
