@@ -7,10 +7,6 @@ console.log("start", new Date().getTime());
 
 document.addEventListener('deviceready', function () {
     
-    beepCheck = new EmulMedia('beepCheck.mp3');
-    beepError = new EmulMedia('beepError.mp3');
-    beepGood = new EmulMedia('beepGood.wav');
-    beepNotHere = new EmulMedia('beepNotHere.mp3');
     navigator.splashscreen.hide();
 });
 
@@ -58,7 +54,10 @@ function EmulMedia(url) {
 }
 
 
-
+    beepCheck = new EmulMedia('beepCheck.mp3');
+    beepError = new EmulMedia('beepError.mp3');
+    beepGood = new EmulMedia('beepGood.wav');
+    beepNotHere = new EmulMedia('beepNotHere.mp3');
 
         function init() {
 
