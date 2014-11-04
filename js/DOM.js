@@ -7,11 +7,15 @@ console.log("start", new Date().getTime());
 
 function EmulMedia(url){
     this.play = function(){
-        return false;
+        if(typeof window.plugins !="undefined"){//mobile
+            return false;
+        }
         url.play();
     };
     this.seekTo = function(to){
-        return false;
+        if(typeof window.plugins !="undefined"){//mobile
+            return false;
+        }
         url.currentTime=to;
     };
 
