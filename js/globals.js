@@ -15,7 +15,7 @@ var nb_game=0;
 var letter_checked=new Array();
 var real ={"width":0,"height":0};
 var lengthWord=-1;
-var version="1.4.4";
+var version="1.5.0";
 
 var C=2;
 var L=1;
