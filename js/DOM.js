@@ -44,6 +44,9 @@ beepCheck = new EmulMedia('beepCheck.mp3');
 beepError = new EmulMedia('beepError.mp3');
 beepGood = new EmulMedia('beepGood.wav');
 beepNotHere = new EmulMedia('beepNotHere.mp3');
+clap = new EmulMedia('clap.mp3');
+boo = new EmulMedia('boo.mp3');
+gasp= new EmulMedia('gasp.mp3');
 
 function playAudio(uri) {
     var url = getPhoneGapPath()+ uri;
@@ -176,7 +179,7 @@ function writeKey(key) {
 
         compareWord(function () {
             if (tryWord == toFind) {
-
+                clap.play();
                 ajax("action=gagner&tryWord=" + toFind);
                 nb_reussite++;
                 nb_game++;
@@ -207,6 +210,7 @@ function newLine() {
         setCurrentLine(L);
     }
     else {
+        boo.play();
         setSoluce();
         ajax("action=perdu&tryWord=" + toFind);
 
@@ -384,7 +388,18 @@ function ajax(data) {
 init();
 
 function searchDico(word){
-    return arrayObjectIndexOf(dictionnaire, word, 'Mot');
+    
+    var index = arrayObjectIndexOf(dictionnaire, word, 'Mot');
+    console.log('index',index,dictionnaire[index],dictionnaire[index]);
+    if(index>=0){
+        if(dictionnaire[index].Dur==4){ 
+            gasp.play();
+        }
+    }
+    else{
+        return index;
+    }
+    
 }
 
 function checkOccurence(word){

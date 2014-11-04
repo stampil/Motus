@@ -15,7 +15,7 @@ var nb_game=0;
 var letter_checked=new Array();
 var real ={"width":0,"height":0};
 var lengthWord=-1;
-var version="1.5.0";
+var version="1.5.1";
 var is_mobile=false;
 
 var C=2;
@@ -25,3 +25,6 @@ var beepCheck;
 var beepError;
 var beepGood;
 var beepNotHere;
+var clap;
+var boo;
+var gasp;
