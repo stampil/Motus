@@ -20,12 +20,16 @@ function EmulMedia(url) {
         source.setAttribute("src", "res/raw/" + url);
         source.setAttribute("type", "audio/" + url.split('.')[1]);
         dom.appendChild(source);
+        if (typeof window.plugins != "undefined") {
         phone = new Media(getPhoneGapPath() + url,
                     function () {
+                        document.getElementById('version').textContent=getPhoneGapPath() + url;
                     },
                     function (err) {
+                        document.getElementById('version').textContent=err;
                     }
             );
+        }
     }
     EmulMedia(url);
 
