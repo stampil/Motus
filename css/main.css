@@ -1,7 +1,10 @@
 body{
     margin:4px;
     background: url('../res/raw/bg.png') #B6D1EA;
-
+}
+#version{
+    margin-top:5px;
+    color:gray;
 }
 
 #game_table{
@@ -121,7 +124,7 @@ box-shadow: 1px 1px 12px #555;
 
 /* #### Mobile Phones Portrait #### */
 @media screen and (max-device-width: 480px) and (orientation: portrait){
-  #version{color:blue}
+
   #clavier{
         max-width: 306px;
   } 
@@ -130,7 +133,7 @@ box-shadow: 1px 1px 12px #555;
 
 /* #### Mobile Phones Landscape #### */
 @media screen and (max-device-width: 640px) and (orientation: landscape){
-  #version{color:red}
+
 }
 
 /* #### Tablets  #### */
@@ -156,12 +159,12 @@ box-shadow: 1px 1px 12px #555;
 }
 /* #### Tablets Portrait  #### */
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait){
-  #version{color:gray}
+
 }
 
 /* #### Tablets  Landscape #### */
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape){
-  #version{color:green}
+
   .br_tablette{
       display:block;
   }
