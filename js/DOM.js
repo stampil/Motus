@@ -7,6 +7,7 @@ console.log("start", new Date().getTime());
 
 document.addEventListener('deviceready', function() {
   navigator.splashscreen.hide();
+  playAudio('beepCheck');
 });
 
 
@@ -46,37 +47,19 @@ beepError = new EmulMedia('beepError.mp3');
 beepGood = new EmulMedia('beepGood.wav');
 beepNotHere = new EmulMedia('beepNotHere.mp3');
 
-var media = {
-    'music': 'res/raw/beepCheck.mp3',
-    'click': 'res/raw/beepGood.wav'
-};
-if( window.plugins && window.plugins.LowLatencyAudio ) {
-    var lla = window.plugins.LowLatencyAudio;
-
-    // preload audio resource
-    lla.preloadAudio( 'music', media['music'], 1, 1, function(msg){
-    }, function(msg){
-        console.log( 'error: ' + msg );
-    });
-
-    lla.preloadFX( 'click', media['click'], function(msg){
-    }, function(msg){
-        console.log( 'error: ' + msg );
-    });
-
-    // now start playing
-    lla.play( 'click' );
-    lla.loop( 'music' );
-
-    // stop after 1 min 
-    window.setTimeout( function(){
-        //lla.stop( 'click' );
-        lla.stop( 'music' );
-
-        lla.unload( 'music' );
-        lla.unload( 'click' );
-    }, 1000 * 60 );
+function playAudio(id) {
+    var audioElement = document.getElementById(id);
+    var url = audioElement.getAttribute('src');
+    var my_media = new Media(url,
+            // success callback
+             function () { console.log("playAudio():Audio Success"); },
+            // error callback
+             function (err) { console.log("playAudio():Audio Error: " + err); }
+    );
+           // Play audio
+    my_media.play();
 }
+
 
 
 //console.log('si on met une instruction db.transaction ici, db à de forte chance de ne pas encore existé, à ce temps là: ',new Date().getTime());
