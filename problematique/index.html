@@ -63,7 +63,13 @@
             le dictionnaire se rempli donc sans bloquer le jeu, ce qui est interessant, car il est vraiment tres long a se remplir... la premiere fois, le dictionnaire ne proposera que des mots rempli, donc commençant par A, ce qui n'est pas une gene en soit.<br />
             2) en websql, il est impossible d'inserer plusieurs champs a la fois séparer simplement par une virgule ( insert into .. values ("mot1"),("mot2"),("mot3")... un tweak permet de le faire en union select, mais est limité à 500.<br />
             3) je log/commente mon code en "fran-glais", une mauvaise habitude qui me colle à la peau...<br />
-            4) websql gere l'autoincrement d'une primarykey : rowId, donc pas besoin de rajouter un champ ID_word
+            4) websql gere l'autoincrement d'une primarykey : rowId, donc pas besoin de rajouter un champ ID_word<br />
+            finalement j'ai preferé passer par du javascript pur, en affectant un tableau d'objet et en testant les presence de mot avec la methode javascript : indexOf, ce qui fait un chargement presque instantané ! et qui m'enleve toutes les problèmatique de synchronisation.
+        </p>
+        <p>
+            le contenu du dictionnaire et une problématique que je n'ai pas anticipé, et qui m'a value au départ de tres mauvaises note sur le playstore et surement des departs définitif d'utilisateur...
+            j'ai du faire un objet de mot, contenant son orthographe et sa difficulé, en effet, bcp sont exotiques, jamais vu pour la majorité d'entres nous, mais il est necessaire de les garder pour la verification orthographique.<br />
+            je les ai noté de cette maniere : 1=commun, 2=peu commun, 3=exotique, 4=grossiereté. pour l'instant le jeu ne propose que les mots de categorie 1.
         </p>
         
         <p>
@@ -73,6 +79,8 @@
             sur internet j'ai vu que ios et android lançait l'evenemenet orientationchange, avec en paramettre un objet specifiant l'orientation. malheureusement avec mes tests mon smartphone ne lance cette evenement avec aucun parametre.<br />
             mais heureusements on peut facilement recalculer l'orientation portrait/paysage en comparant simplement la longueur entre width et le height. a noter le widthxheight sur une page correspond a heightxwidth sur le mobile, c'est inversé, un landscape web correspond a un portrait mobile...<br />
             apres une recherche plus aprronfondie, les smartphones donne une valeur d'orientation avec window.orientation mais la valeur differe suivant le type de mobile, donc inutilisable dans un context multi-device.
+            Finalement, j'ai opté pour du CSS pur sans passer par du javascript avec le css suivant par exemple :
+            @media screen and (max-device-width: 480px) and (orientation: portrait){  les tests effectué sont beaucoup plus fiable.
         </p>
         
 
