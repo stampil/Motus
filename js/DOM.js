@@ -6,6 +6,7 @@ lengthWord= dictionnaire[0].Mot.length;
 console.log("start", new Date().getTime());
 
 document.addEventListener('deviceready', function() {
+    is_mobile=true;
   navigator.splashscreen.hide();
 });
 
@@ -23,7 +24,7 @@ function EmulMedia(url){
     EmulMedia(url);
     
     this.play = function(){
-        if(typeof window.plugins !="undefined"){//mobile
+        if(is_mobile){//mobile
             playAudio(url);
             return false;
         }
@@ -31,7 +32,7 @@ function EmulMedia(url){
     };
     this.seekTo = function(to){
         console.log('seekTo',dom,to);
-        if(typeof window.plugins !="undefined"){//mobile
+        if(is_mobile){//mobile
             return false;
         }
         if(dom.duration)  dom.currentTime=to;

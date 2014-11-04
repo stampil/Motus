@@ -16,6 +16,7 @@ var letter_checked=new Array();
 var real ={"width":0,"height":0};
 var lengthWord=-1;
 var version="1.5.0";
+var is_mobile=false;
 
 var C=2;
 var L=1;
