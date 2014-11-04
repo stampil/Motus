@@ -7,7 +7,7 @@ console.log("start", new Date().getTime());
 
 document.addEventListener('deviceready', function() {
   navigator.splashscreen.hide();
-  playAudio('beepCheck');
+  playAudio();
 });
 
 
@@ -25,6 +25,7 @@ function EmulMedia(url){
     
     this.play = function(){
         if(typeof window.plugins !="undefined"){//mobile
+            playAudio();
             return false;
         }
         dom.play();
@@ -45,17 +46,16 @@ beepError = new EmulMedia('beepError.mp3');
 beepGood = new EmulMedia('beepGood.wav');
 beepNotHere = new EmulMedia('beepNotHere.mp3');
 
-function playAudio(id) {
-    var audioElement = document.getElementById(id);
-    var url = audioElement.getAttribute('src');
+function playAudio() {
+    var url = getPhoneGapPath()+'beepCheck.mp3';
     var my_media = new Media(url,
             // success callback
-             function () { console.log("playAudio():Audio Success"); },
+             function () { document.getElementById('version').textContent='audio '+url+' success'; },
             // error callback
-             function (err) { console.log("playAudio():Audio Error: " + err); }
+             function (err) { document.getElementById('version').textContent=err; }
     );
-           // Play audio
     my_media.play();
+           // Play audio
 }
 
 
@@ -404,10 +404,9 @@ function arrayObjectIndexOf(myArray, searchTerm, property) {
 }
 
 function getPhoneGapPath() {
-
     var path = window.location.pathname;
     path = path.substr( path, path.length - 10 );
-    return 'file://' + path;
+    return 'file://' + path+'res/raw/';
 
 };
-document.getElementById('version').textContent=getPhoneGapPath();
+
