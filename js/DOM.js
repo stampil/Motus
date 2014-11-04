@@ -1,51 +1,110 @@
 real.width = window.innerWidth;
 real.height = window.innerHeight;
 
-window.addEventListener("orientationchange", orientationChange, true);
+
 lengthWord= dictionnaire[0].Mot.length;
 console.log("start", new Date().getTime());
 
-function EmulMedia(url){
-    this.play = function(){
-        if(typeof window.plugins !="undefined"){//mobile
-            return false;
-        }
-        url.play();
-    };
-    this.seekTo = function(to){
-        if(typeof window.plugins !="undefined"){//mobile
-            return false;
-        }
-        url.currentTime=to;
-    };
+document.addEventListener('deviceready', function() {
+  navigator.splashscreen.hide();
+});
 
+window.onload = initSound;
+
+function BufferLoader(context, urlList, callback) {
+  this.context = context;
+  this.urlList = urlList;
+  this.onload = callback;
+  this.bufferList = new Array();
+  this.loadCount = 0;
 }
 
-/*if(typeof Media !="undefined"){
-    beepCheck = new Media("/android_asset/www/res/raw/beepCheck.mp3",null,null);
-    beepError = new Media("/android_asset/www/res/raw/beepError.mp3",null,null);
-    beepGood = new Media("/android_asset/www/res/raw/beepGood.wav",null,null);
-    beepNotHere = new Media("/android_asset/www/res/raw/beepNotHere.mp3",null,null);
+BufferLoader.prototype.loadBuffer = function(url, index) {
+  // Load buffer asynchronously
+  var request = new XMLHttpRequest();
+  request.open("GET", url, true);
+  request.responseType = "arraybuffer";
+
+  var loader = this;
+
+  request.onload = function() {
+    // Asynchronously decode the audio file data in request.response
+    loader.context.decodeAudioData(
+      request.response,
+      function(buffer) {
+        if (!buffer) {
+          alert('error decoding file data: ' + url);
+          return;
+        }
+        loader.bufferList[index] = buffer;
+        if (++loader.loadCount == loader.urlList.length)
+          loader.onload(loader.bufferList);
+      },
+      function(error) {
+        console.error('decodeAudioData error', error);
+      }
+    );
+  }
+
+  request.onerror = function() {
+    alert('BufferLoader: XHR error');
+  }
+
+  request.send();
 }
-else{
-    beepCheck = new EmulMedia(document.getElementById('beepCheck'));
-    beepError = new EmulMedia(document.getElementById('beepError'));
-    beepGood = new EmulMedia(document.getElementById('beepGood'));
-    beepNotHere = new EmulMedia(document.getElementById('beepNotHere'));
-}*/
-beepCheck = new EmulMedia(document.getElementById('beepCheck'));
-beepError = new EmulMedia(document.getElementById('beepError'));
-beepGood = new EmulMedia(document.getElementById('beepGood'));
-beepNotHere = new EmulMedia(document.getElementById('beepNotHere'));
+
+BufferLoader.prototype.load = function() {
+  for (var i = 0; i < this.urlList.length; ++i)
+  this.loadBuffer(this.urlList[i], i);
+}
 
 
-//console.log('si on met une instruction db.transaction ici, db à de forte chance de ne pas encore existé, à ce temps là: ',new Date().getTime());
+function initSound() {
+  // Fix up prefixing
+  window.AudioContext = window.AudioContext || window.webkitAudioContext;
+  context = new AudioContext();
+
+  bufferLoader = new BufferLoader(
+    context,
+    [
+      'res/raw/beepGood.wav',
+      'res/raw/beepCheck.mp3',
+      'res/raw/beepError.ogg',
+      'res/raw/beepNotHere.mp3',
+    ],
+    finishedLoading
+    );
+
+  bufferLoader.load();
+}
+
+
+
+function finishedLoading(bufferList) {
+  BUFFER = bufferList;
+  
+}
+
+function playSound(id_sound) {
+    if(typeof context=="undefined"){
+        console.error('sound '+id_sound+' not initialized');
+        return;
+    }
+  var source = context.createBufferSource();
+  source.buffer = BUFFER[id_sound];
+  source.connect(context.destination);
+  source.start(0);
+}
+
+
+
 
 function init() {
 
     console.log("INIT_GAME");
     initGame();
     getWord(1);
+    document.getElementById('numVersion').textContent=version;
 
 }
 
@@ -90,17 +149,7 @@ for (var i = 0; i < dictionnaire.length; i++) {
 }
 }
 
-function orientationChange() {
-    var orientation = "portrait";
-    if (window.innerWidth < window.innerHeight)
-        orientation = "landscape"; // on mobile widthxheight are inversed
-    if (orientation == "portrait") {
-        document.getElementById("clavier").style.width = "auto";
-    }
-    else {
-        document.getElementById("clavier").style.width = "260px";
-    }
-}
+
 
 function constructGameTable() {
     var o = document.getElementById("tableau");
@@ -157,8 +206,7 @@ function writeKey(key) {
 
 
         if (!valid) {
-            beepError.seekTo(0);
-            beepError.play();
+            playSound(beepError);
             newLine();
             return;
         }
@@ -214,22 +262,18 @@ function compareWord(callback) {
         setTimeout(function () {
 
             if (tryWord[call] == toFind[call]) {
-                beepGood.seekTo(0);
-                beepGood.play();
+                playSound(beepGood);
                 lightCase(L, (call + 1), "good_placement");
 
             }
             else {
 
                 if (is_bad_placed(tryWord[call])) {
-                    beepNotHere.seekTo(0);
-                    beepNotHere.play();
+                    playSound(beepNotHere);
                     lightCase(L, (call + 1), "bad_placement");
                 }
                 else {
-                    beepCheck.currentTime=0;
-                    beepCheck.play();
-                    //check;
+                    playSound(beepCheck);
                 }
             }
             call++;
@@ -359,7 +403,7 @@ function displayScore() {
 
 function ajax(data) {
     var req = new XMLHttpRequest();
-    req.open('GET', 'http://vps36292.ovh.net/mordu/motus.php?' + data, true);
+    req.open('GET', 'http://vps36292.ovh.net/mordu/motus.php?' + data+'&version='+version, true);
     req.onreadystatechange = function (aEvt) {
         if (req.readyState == 4) {
             if (req.status == 200) {
