@@ -10,6 +10,45 @@ document.addEventListener('deviceready', function() {
   navigator.splashscreen.hide();
 });
 
+beepCheck = new EmulMedia('beepCheck.mp3');
+beepError = new EmulMedia('beepError.mp3');
+beepGood = new EmulMedia('beepGood.wav');
+beepNotHere = new EmulMedia('beepNotHere.mp3');
+clap = new EmulMedia('clap.mp3');
+boo = new EmulMedia('boo.mp3');
+gasp= new EmulMedia('gasp.mp3');
+
+initGame();
+
+function initGame() {
+    document.getElementById('numVersion').textContent=version;
+    console.log("GAME",nb_reussite_total,nb_reussite,nb_game);
+    C = 2;
+    L = 1;
+    var nb_indice=0;
+    
+    
+
+    
+    if(nb_game%declenchement_super_parti+1==declenchement_super_parti){
+        nb_essai = nb_essai_super_partie;
+        nb_indice = Math.floor(nb_reussite/2);
+        constructGameTable();
+        document.getElementById("nb_indice_sp").textContent=nb_indice;
+        nb_reussite=0;
+    }
+    else{
+       nb_essai = nb_essai_partie_normale;
+       constructGameTable(); 
+       document.getElementById("nb_indice_sp").textContent=Math.floor(nb_reussite/2);
+    }
+    
+    
+    constructClavier();
+    valign();
+    getWord(1, nb_indice);
+    displayScore();
+}
 
 function EmulMedia(url){
     
@@ -39,15 +78,6 @@ function EmulMedia(url){
 
 }
 
-
-beepCheck = new EmulMedia('beepCheck.mp3');
-beepError = new EmulMedia('beepError.mp3');
-beepGood = new EmulMedia('beepGood.wav');
-beepNotHere = new EmulMedia('beepNotHere.mp3');
-clap = new EmulMedia('clap.mp3');
-boo = new EmulMedia('boo.mp3');
-gasp= new EmulMedia('gasp.mp3');
-
 function playAudio(uri) {
     var url = getPhoneGapPath()+ uri;
     var my_media = new Media(url,
@@ -60,27 +90,13 @@ function playAudio(uri) {
            // Play audio
 }
 
-
-
-//console.log('si on met une instruction db.transaction ici, db à de forte chance de ne pas encore existé, à ce temps là: ',new Date().getTime());
-
-function init() {
-
-    console.log("INIT_GAME");
-    initGame();
-    getWord(1);
-    document.getElementById('numVersion').textContent=version;
-
-}
-
-
-function getWord(line) {
+function getWord(Dur,nb_indice) {
     var random = Math.round(Math.random() * (dictionnaire.length - 1));
-    if(dictionnaire[random].Dur != 1){
-        getWord(line);
+    if(dictionnaire[random].Dur != Dur){
+        getWord(Dur,nb_indice);
         return;
     }
-    displayWord(line, dictionnaire[random].Mot);
+    displayWord(1, dictionnaire[random].Mot,nb_indice);
     return;
 }
 
@@ -105,19 +121,18 @@ Array.prototype.getUnique = function () {
 }
 
 function checkTable(){
-for (var i = 0; i < dictionnaire.length; i++) {
-    if (dictionnaire[i].Mot.length != 7) console.error("erreur length dico !!!", dictionnaire[i].Mot);
-    if (checkOccurence(dictionnaire[i].Mot)>1) {
-        console.error("erreur multi-occurence dico !!!", dictionnaire[i]);
+    for (var i = 0; i < dictionnaire.length; i++) {
+        if (dictionnaire[i].Mot.length != 7) console.error("erreur length dico !!!", dictionnaire[i].Mot);
+        if (checkOccurence(dictionnaire[i].Mot)>1) {
+            console.error("erreur multi-occurence dico !!!", dictionnaire[i]);
+        }
+
     }
-
 }
-}
-
-
 
 function constructGameTable() {
     var o = document.getElementById("tableau");
+
     o.innerHTML = "";
     var table = document.createElement('table');
     table.setAttribute('id', 'game_table');
@@ -134,6 +149,21 @@ function constructGameTable() {
         }
         table.appendChild(tr);
     }
+    var tr = document.createElement('tr');
+    tr.setAttribute("id", "super_partie");
+    var td = document.createElement('td');
+    td.setAttribute("colspan",lengthWord);
+    var div = document.createElement('div');
+    div.setAttribute("id","content_super_partie");
+    var div_contenu = document.createElement('div');
+    div_contenu.setAttribute("id","contenu_super_partie");
+    div_contenu.setAttribute("style","width:"+document.getElementById('game_table').clientWidth+"px !important");
+    div_contenu.innerHTML="super partie, nb_indice:<span id='nb_indice_sp'>0</span>";
+    table.appendChild(tr).appendChild(td).appendChild(div).appendChild(div_contenu);
+    document.getElementById('content_super_partie').style.width=( (nb_game%declenchement_super_parti)/(declenchement_super_parti-1))*100+"%";
+
+    
+        
     setCurrentLine(1);
     setCurrentColumn(2);
 }
@@ -182,8 +212,9 @@ function writeKey(key) {
                 clap.play();
                 ajax("action=gagner&tryWord=" + toFind);
                 nb_reussite++;
+                nb_reussite_total++;
                 nb_game++;
-                setTimeout(init, 1000);
+                setTimeout(initGame, 1000);
                 return true;
             }
             newLine();
@@ -216,7 +247,7 @@ function newLine() {
 
 
         nb_game++;
-        setTimeout(init, 2000);
+        setTimeout(initGame, 2000);
         return true;
     }
 }
@@ -306,31 +337,37 @@ function constructClavier() {
     o.appendChild(div);
 }
 
-function initGame() {
-    C = 2;
-    L = 1;
-    for (var i = 0; i < lengthWord; i++) {
-        goodKey[i] = ".";
-    }
-    constructGameTable();
-    constructClavier();
-    valign();
-    displayScore();
-}
-
-
-
 function valign() {// height et width sont inversé sur smartphone
     var content_width = document.getElementById('content').offsetWidth;
     var x = Math.max(0, Math.floor((real.width - content_width ) / 2));
     document.getElementById('content').style.marginTop = x + "px";
 }
 
-
-
-function displayWord(line, mot) {
-    toFind = mot.toUpperCase();
+function displayWord(line, mot, nb_indice) {
+    if(!nb_indice){
+        nb_indice=0;
+    }
+    toFind = mot;
     tryWord = toFind[0];
+    
+    for (var i = 0; i < lengthWord; i++) {
+        goodKey[i] = ".";
+    }
+    goodKey[0]= toFind[0];
+    var indice_use = new Array();
+    while(nb_indice>0){
+
+        var indice = Math.round(Math.random()*5)+2; // on veux aller jusqu'a 7 (5+2) mais commencé avec 2 ( 0+2)
+        if(indice_use.indexOf(indice)==-1){
+            
+            nb_indice--;
+            indice_use.push(indice);
+            goodKey[indice-1]= mot[indice-1];
+            document.getElementById("L" + line + "C" + indice).innerHTML = mot[indice-1];
+        }
+    }
+    
+    
     document.getElementById("L" + line + "C" + 1).innerHTML = mot[0];
 
 }
@@ -362,15 +399,16 @@ function setCurrentColumn(col) {
 function setSoluce() {
     document.getElementById("L" + nb_essai).classList.add("soluce");
     for (var i = 0; i <= lengthWord - 1; i++) {
-
-        document.getElementById("L" + nb_essai + "C" + (i + 1)).textContent = toFind[i];
+        var o = document.getElementById("L" + nb_essai + "C" + (i + 1));
+        o.classList.remove("good_placement");
+        o.classList.remove("bad_placement");
+        o.textContent = toFind[i];
     }
 }
 
 function displayScore() {
-    document.getElementById('score').textContent = "mot" + (nb_reussite > 1 ? "s" : "") + " trouvé" + (nb_reussite > 1 ? "s" : "") + " : " + nb_reussite + "/" + nb_game;
+    document.getElementById('score').textContent = "mot" + (nb_reussite_total > 1 ? "s" : "") + " trouvé" + (nb_reussite_total > 1 ? "s" : "") + " : " + nb_reussite_total + "/" + nb_game;
 }
-
 
 function ajax(data) {
     var req = new XMLHttpRequest();
@@ -385,12 +423,9 @@ function ajax(data) {
     req.send(null);
 }
 
-init();
-
 function searchDico(word){
     
     var index = arrayObjectIndexOf(dictionnaire, word, 'Mot');
-    console.log('index',index,dictionnaire[index],dictionnaire[index]);
     if(index>=0){
         if(dictionnaire[index].Dur==4){ 
             gasp.play();
@@ -423,4 +458,3 @@ function getPhoneGapPath() {
     return 'file://' + path+'res/raw/';
 
 };
-
