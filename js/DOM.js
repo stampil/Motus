@@ -17,6 +17,8 @@ beepNotHere = new EmulMedia('beepNotHere.mp3');
 clap = new EmulMedia('clap.mp3');
 boo = new EmulMedia('boo.mp3');
 gasp= new EmulMedia('gasp.mp3');
+applause = new EmulMedia('applause.mp3');
+
 
 initGame();
 
@@ -28,22 +30,23 @@ function initGame() {
     var nb_indice=0;
     
     
-
-    
-    if(nb_game%declenchement_super_parti+1==declenchement_super_parti){
+    if(decompte_super_parti==0 ){
+        console.log("superpartie",decompte_super_parti,declenchement_super_parti);
         nb_essai = nb_essai_super_partie;
         nb_indice = Math.floor(nb_reussite/2);
         constructGameTable();
         document.getElementById("nb_indice_sp").textContent=nb_indice;
         nb_reussite=0;
+        is_super_partie=true;
     }
     else{
        nb_essai = nb_essai_partie_normale;
        constructGameTable(); 
        document.getElementById("nb_indice_sp").textContent=Math.floor(nb_reussite/2);
+       is_super_partie=false;
     }
     
-    
+    decompte_super_parti--;
     constructClavier();
     valign();
     getWord(1, nb_indice);
@@ -158,9 +161,9 @@ function constructGameTable() {
     var div_contenu = document.createElement('div');
     div_contenu.setAttribute("id","contenu_super_partie");
     div_contenu.setAttribute("style","width:"+document.getElementById('game_table').clientWidth+"px !important");
-    div_contenu.innerHTML="super partie, nb_indice:<span id='nb_indice_sp'>0</span>";
+    div_contenu.innerHTML="Super partie, nb indice : <span id='nb_indice_sp'>0</span>";
     table.appendChild(tr).appendChild(td).appendChild(div).appendChild(div_contenu);
-    document.getElementById('content_super_partie').style.width=( (nb_game%declenchement_super_parti)/(declenchement_super_parti-1))*100+"%";
+    document.getElementById('content_super_partie').style.width= ((declenchement_super_parti-decompte_super_parti)/declenchement_super_parti)*100+"%";
 
     
         
@@ -209,11 +212,22 @@ function writeKey(key) {
 
         compareWord(function () {
             if (tryWord == toFind) {
-                clap.play();
+               
                 ajax("action=gagner&tryWord=" + toFind);
-                nb_reussite++;
-                nb_reussite_total++;
-                nb_game++;
+                
+                if(is_super_partie){
+                    applause.play();
+                    super_partie_trouve++;
+                    super_partie_faite++;
+                    decompte_super_parti = declenchement_super_parti;
+                }
+                else{
+                    clap.play();
+                    nb_reussite++;
+                    nb_reussite_total++;
+                    nb_game++;
+                }
+                
                 setTimeout(initGame, 1000);
                 return true;
             }
@@ -245,8 +259,14 @@ function newLine() {
         setSoluce();
         ajax("action=perdu&tryWord=" + toFind);
 
-
-        nb_game++;
+        if(is_super_partie){
+                    super_partie_faite++;
+                    decompte_super_parti = declenchement_super_parti;
+        }
+        else{
+            nb_game++;
+        }
+        
         setTimeout(initGame, 2000);
         return true;
     }
@@ -408,6 +428,7 @@ function setSoluce() {
 
 function displayScore() {
     document.getElementById('score').textContent = "mot" + (nb_reussite_total > 1 ? "s" : "") + " trouvé" + (nb_reussite_total > 1 ? "s" : "") + " : " + nb_reussite_total + "/" + nb_game;
+     document.getElementById('score').textContent +=" | super partie : "+super_partie_trouve+"/"+super_partie_faite;
 }
 
 function ajax(data) {

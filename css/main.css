@@ -137,6 +137,8 @@ box-shadow: 1px 1px 12px #555;
     font-size: 10pt;
     vertical-align: middle;
     font-weight: lighter;
+    text-transform: none;
+
 }
 
 
