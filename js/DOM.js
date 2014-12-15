@@ -19,15 +19,18 @@ boo = new EmulMedia('boo.mp3');
 gasp= new EmulMedia('gasp.mp3');
 applause = new EmulMedia('applause.mp3');
 
-
 initGame();
 
 function initGame() {
     document.getElementById('numVersion').textContent=version;
+    nb_game =cookie.get("nb_game") || 0;
+    nb_reussite_total =cookie.get("nb_reussite_total") || 0;
+    super_partie_trouve = cookie.get("super_partie_trouve") || 0;
+    super_partie_faite =  cookie.get("super_partie_faite") || 0;
     console.log("GAME",nb_reussite_total,nb_reussite,nb_game);
     C = 2;
     L = 1;
-    var nb_indice=0;
+    var nb_indice= 0;
     
     
     if(decompte_super_parti==0 ){
@@ -49,7 +52,9 @@ function initGame() {
     decompte_super_parti--;
     constructClavier();
     valign();
+
     getWord(1, nb_indice);
+   
     displayScore();
 }
 
@@ -215,10 +220,13 @@ function writeKey(key) {
                
                 ajax("action=gagner&tryWord=" + toFind);
                 
+                
                 if(is_super_partie){
                     applause.play();
                     super_partie_trouve++;
                     super_partie_faite++;
+                    cookie.set("super_partie_trouve",super_partie_trouve);
+                    cookie.set("super_partie_faite",super_partie_faite);
                     decompte_super_parti = declenchement_super_parti;
                 }
                 else{
@@ -226,6 +234,8 @@ function writeKey(key) {
                     nb_reussite++;
                     nb_reussite_total++;
                     nb_game++;
+                    cookie.set("nb_game",nb_game);
+                    cookie.set("nb_reussite_total",nb_reussite_total);
                 }
                 
                 setTimeout(initGame, 1000);
@@ -257,14 +267,18 @@ function newLine() {
     else {
         boo.play();
         setSoluce();
+        
         ajax("action=perdu&tryWord=" + toFind);
 
         if(is_super_partie){
                     super_partie_faite++;
+                    cookie.set("super_partie_faite",super_partie_faite);
                     decompte_super_parti = declenchement_super_parti;
+
         }
         else{
             nb_game++;
+            cookie.set("nb_game",nb_game);
         }
         
         setTimeout(initGame, 2000);
@@ -368,6 +382,7 @@ function displayWord(line, mot, nb_indice) {
         nb_indice=0;
     }
     toFind = mot;
+
     tryWord = toFind[0];
     
     for (var i = 0; i < lengthWord; i++) {
@@ -432,6 +447,8 @@ function displayScore() {
 }
 
 function ajax(data) {
+    //desactive stats
+    return true;
     var req = new XMLHttpRequest();
     req.open('GET', 'http://vps36292.ovh.net/mordu/motus.php?' + data+'&version='+version, true);
     req.onreadystatechange = function (aEvt) {
