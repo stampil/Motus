@@ -338,25 +338,34 @@ function is_bad_placed(key) {
 function constructClavier() {
     var o = document.getElementById("clavier");
     o.innerHTML = "";
-    var a = 97;
-    for (var i = 0; i < 26; i++) {
-        var key = String.fromCharCode(a + i);
-        var div = document.createElement("div");
-        div.setAttribute('id', 'touche_' + key);
-        div.setAttribute('value', key);
-        div.setAttribute('class', 'touches');
-        div.textContent = key;
-        div.onclick = function (ce) {
-            writeKey(ce.target.innerText);
-        };
-        o.appendChild(div);
+    var keys = [["A","Z","E","R","T","Y","U","I","O","P"],
+    ["Q","S","D","F","G","H","J","K","L","M"],
+    ["W","X","C","V","B","N"]];
+    /*var a = 97;
+    for (var i = 0; i < 26; i++) {*/
+    for(var i=0; i< keys.length; i++){
+        for(var j=0;j< keys[i].length; j++){
+            //var key = String.fromCharCode(a + i);
+            var key =  keys[i][j];
+            var div = document.createElement("div");
+            div.setAttribute('id', 'touche_' + key);
+            div.setAttribute('value', key);
+            div.setAttribute('class', 'touches');
+            div.textContent = key;
+            div.onmousedown = function (ce) {
+                writeKey(ce.target.innerText);
+            };
+            o.appendChild(div);
+        }
+        var br = document.createElement("br");
+        o.appendChild(br);
     }
     var div = document.createElement("div");
     div.setAttribute('id', 'touche_back');
     div.setAttribute('value', '-1');
     div.setAttribute('class', 'touches');
     div.textContent = '←';
-    div.onclick = function () {
+    div.onmousedown = function () {
         eraseKey();
     };
     o.appendChild(div);
@@ -365,7 +374,7 @@ function constructClavier() {
     div.setAttribute('value', '1');
     div.setAttribute('class', 'touches');
     div.textContent = '→';
-    div.onclick = function () {
+    div.onmousedown = function () {
         jumpKey();
     };
     o.appendChild(div);
