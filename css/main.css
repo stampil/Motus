@@ -53,10 +53,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cfbc0f00', e
 
 #game_table td div{
     margin:3px 3px 3px 4px;
-    width: 25px;
+    width: 18px;
     height: 11px;
-    padding: 0 0 15px 0;
-        font-size: 1.4em;
+    padding: 0 0 7px 0;
+    /*    font-size: 1.4em;*/
     font-weight: bold;
     text-align: center;
     color:whitesmoke;
@@ -159,9 +159,9 @@ box-shadow: 1px 1px 12px #555;
 /* #### Tablets  #### */
 @media screen and (min-device-width: 768px){
     #game_table td div{
-        width: 34px;
-        height: 21px;
-        font-size: 2em;
+        /*width: 34px;*/
+        height: 11px;
+        /*font-size: 2em;*/
     }
     #clavier .touches {
         /*width: 33px;
