@@ -159,19 +159,19 @@ box-shadow: 1px 1px 12px #555;
 /* #### Tablets  #### */
 @media screen and (min-device-width: 768px){
     #game_table td div{
-        /*width: 34px;*/
-        height: 11px;
-        /*font-size: 2em;*/
+        width: 34px;
+        height: 30px;
+        font-size: 1.9em;
     }
     #clavier .touches {
-        /*width: 33px;
+        width: 33px;
         height: 30px;
         padding: 13px 0 7px 0;
-        margin: 6px;*/
+        margin: 6px;
         font-size: 17px;
     }
     #clavier{
-        /*max-width: 480px;*/
+        max-width: 480px;
     }
     #content{
         margin-top: 90px !important;
