@@ -177,34 +177,27 @@ function constructGameTable() {
 }
 
 function jumpKey() {
+	console.log("jumpKey",C,goodKey[C - 1]);
     if (goodKey[C - 1] != ".") {
         writeKey(goodKey[C - 1]);
     }
+	if(C > toFind.length){
+		verifWord();
+	}
 }
 
 function eraseKey() {
     if (C <= 2)
         return;
-
+	document.getElementById('touche_forward').style.background="";
     tryWord = tryWord.substr(0, tryWord.length - 1);
     C--;
     document.getElementById("L" + L + "C" + C).textContent = ".";
     setCurrentColumn(C);
 }
-function writeKey(key) {
-    if (L > nb_essai) {
-        return;
-    }
-    if (!document.getElementById("L" + L + "C" + C)) {
-        return false;
-    }
-    document.getElementById("L" + L + "C" + C).textContent = key;
-    tryWord += key;
-    C++;
 
-    if (C > lengthWord) {
-
-        var valid = validateWord(tryWord);
+function verifWord(){
+	 var valid = validateWord(tryWord);
         ajax("action=statsTry&tryWord=" + tryWord + "&inDico=" + valid);
 
 
@@ -243,14 +236,30 @@ function writeKey(key) {
             }
             newLine();
         });
+}
 
-
-    } else {
-        setCurrentColumn(C);
+function writeKey(key) {
+    if (L > nb_essai) {
+        return;
     }
+    if (!document.getElementById("L" + L + "C" + C)) {
+        return false;
+    }
+    document.getElementById("L" + L + "C" + C).textContent = key;
+    tryWord += key;
+    C++;
+    
+    if (C <= lengthWord ) {
+        setCurrentColumn(C);
+		document.getElementById('touche_forward').style.background="";
+    }
+	else{
+		document.getElementById('touche_forward').style.background="lightgreen";
+	}
 }
 
 function newLine() {
+	document.getElementById('touche_forward').style.background="";
     C = 2;
     L++;
     setCurrentColumn(C);
@@ -370,7 +379,7 @@ function constructClavier() {
     };
     o.appendChild(div);
     var div = document.createElement("div");
-    div.setAttribute('id', 'touche_back');
+    div.setAttribute('id', 'touche_forward');
     div.setAttribute('value', '1');
     div.setAttribute('class', 'touches');
     div.textContent = '→';
