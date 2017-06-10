@@ -53,10 +53,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cfbc0f00', e
 
 #game_table td div{
     margin:3px 3px 3px 4px;
-    width: 18px;
-    height: 11px;
+    width: 25px;
+    height: 20px;
     padding: 0 0 7px 0;
-    /*    font-size: 1.4em;*/
+    font-size: 1.4em;
     font-weight: bold;
     text-align: center;
     color:whitesmoke;
@@ -106,15 +106,15 @@ display:inline-block;
 .touches{
 display: inline-block;
 border: 1px solid gray;
-padding: 7px 0px;
-width:23px;
+padding: 11px 0px;
+width:35px;
 text-align: center;
 border-radius: 5px;
 background: whitesmoke;
 color: black;
 cursor: pointer;
 box-shadow: 1px 1px 12px #555;
-    margin:2px
+    margin:6px
 }
 
 

@@ -23,7 +23,7 @@ var nb_game=0;
 var letter_checked=new Array();
 var real ={"width":0,"height":0};
 var lengthWord=-1;
-var version="2.0.4";
+var version="2.0.5";
 var is_mobile=false;
 
 var C=2;
