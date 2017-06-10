@@ -87,6 +87,7 @@ function EmulMedia(url){
 }
 
 function playAudio(uri) {
+	return false;
     var url = getPhoneGapPath()+ uri;
     var my_media = new Media(url,
             // success callback
