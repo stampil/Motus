@@ -29,7 +29,7 @@
     <preference name="android-minSdkVersion" value="11" />
     <preference name="android-targetSdkVersion" value="19" />
     <preference name="android-installLocation" value="auto" />
-    <plugin name="SplashScreen" value="org.apache.cordova.SplashScreen"/>
+    <gap:plugin name="cordova-plugin-splashscreen" source="npm" version="2.1.0" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.media" />
 
