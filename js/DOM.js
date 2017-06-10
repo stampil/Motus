@@ -197,7 +197,15 @@ function eraseKey() {
     setCurrentColumn(C);
 }
 
+var deja_clique = false;
 function verifWord(){
+//si on appuye plusieurs fois sur la fleche verte, lance plusieurs fois la valid et consomme des lignes en erreur : fix : verif que le mot ai bien 7 lettres sinon on valide pas
+	 if(!deja_clique){
+		 deja_clique = true;
+	 }
+	 else{
+		 return false;
+	 }
 	 var valid = validateWord(tryWord);
         ajax("action=statsTry&tryWord=" + tryWord + "&inDico=" + valid);
 
@@ -260,6 +268,7 @@ function writeKey(key) {
 }
 
 function newLine() {
+	deja_clique = false;
 	document.getElementById('touche_forward').style.background="";
     C = 2;
     L++;
