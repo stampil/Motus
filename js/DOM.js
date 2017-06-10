@@ -22,6 +22,7 @@ applause = new EmulMedia('applause.mp3');
 initGame();
 
 function initGame() {
+	deja_clique = false;
     document.getElementById('numVersion').textContent=version;
     nb_game =cookie.get("nb_game") || 0;
     nb_reussite_total =cookie.get("nb_reussite_total") || 0;
