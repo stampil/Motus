@@ -35,6 +35,20 @@ function initGame(nb_word) {
     super_partie_faite =  cookie.get("super_partie_faite") || 0;
     lengthWord = cookie.get("lengthWord") || 7;
     
+    switch(lengthWord){
+        case "5":
+            nb_essai_super_partie = 1;
+            nb_essai_partie_normale =5;
+            break;
+        case "9":
+            nb_essai_super_partie = 3;
+            nb_essai_partie_normale =7;
+            break;
+        default:
+            nb_essai_super_partie = 2;
+            break;
+    }
+    
     console.log("GAME",nb_reussite_total,nb_reussite,nb_game);
     C = 2;
     L = 1;
