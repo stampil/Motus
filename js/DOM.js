@@ -2,12 +2,13 @@ real.width = window.innerWidth;
 real.height = window.innerHeight;
 
 
-lengthWord= dictionnaire[0].Mot.length;
+lengthWord= 7;
 console.log("start", new Date().getTime());
 
 document.addEventListener('deviceready', function() {
   is_mobile=true;
   navigator.splashscreen.hide();
+  
 });
 
 beepCheck = new EmulMedia('beepCheck.mp3');
@@ -21,13 +22,19 @@ applause = new EmulMedia('applause.mp3');
 
 initGame();
 
-function initGame() {
-	deja_clique = false;
+function initGame(nb_word) {
+    deja_clique = false;
     document.getElementById('numVersion').textContent=version;
+    if(nb_word){
+        cookie.set("lengthWord",nb_word);
+        location.href=location.href;
+    }
     nb_game =cookie.get("nb_game") || 0;
     nb_reussite_total =cookie.get("nb_reussite_total") || 0;
     super_partie_trouve = cookie.get("super_partie_trouve") || 0;
     super_partie_faite =  cookie.get("super_partie_faite") || 0;
+    lengthWord = cookie.get("lengthWord") || 7;
+    
     console.log("GAME",nb_reussite_total,nb_reussite,nb_game);
     C = 2;
     L = 1;
@@ -101,12 +108,12 @@ function playAudio(uri) {
 }
 
 function getWord(Dur,nb_indice) {
-    var random = Math.round(Math.random() * (dictionnaire.length - 1));
-    if(dictionnaire[random].Dur != Dur){
+    var random = Math.round(Math.random() * (dictionnaire[lengthWord].length - 1));
+    if(dictionnaire[lengthWord][random].Dur != Dur){
         getWord(Dur,nb_indice);
         return;
     }
-    displayWord(1, dictionnaire[random].Mot,nb_indice);
+    displayWord(1, dictionnaire[lengthWord][random].Mot,nb_indice);
     return;
 }
 
@@ -131,10 +138,10 @@ Array.prototype.getUnique = function () {
 }
 
 function checkTable(){
-    for (var i = 0; i < dictionnaire.length; i++) {
-        if (dictionnaire[i].Mot.length != 7) console.error("erreur length dico !!!", dictionnaire[i].Mot);
-        if (checkOccurence(dictionnaire[i].Mot)>1) {
-            console.error("erreur multi-occurence dico !!!", dictionnaire[i]);
+    for (var i = 0; i < dictionnaire[lengthWord].length; i++) {
+        if (dictionnaire[lengthWord][i].Mot.length != 7) console.error("erreur length dico !!!", dictionnaire[lengthWord][i].Mot);
+        if (checkOccurence(dictionnaire[lengthWord][i].Mot)>1) {
+            console.error("erreur multi-occurence dico !!!", dictionnaire[lengthWord][i]);
         }
 
     }
@@ -492,9 +499,9 @@ function ajax(data) {
 
 function searchDico(word){
     
-    var index = arrayObjectIndexOf(dictionnaire, word, 'Mot');
+    var index = arrayObjectIndexOf(dictionnaire[lengthWord], word, 'Mot');
     if(index>=0){
-        if(dictionnaire[index].Dur==4){ 
+        if(dictionnaire[lengthWord][index].Dur==4){ 
             gasp.play();
         }
     }
@@ -506,8 +513,8 @@ function searchDico(word){
 
 function checkOccurence(word){
     var occ = 0;
-    for(var i = 0, len = dictionnaire.length; i < len; i++) {
-        if (dictionnaire[i].Mot === word) occ++;
+    for(var i = 0, len = dictionnaire[lengthWord].length; i < len; i++) {
+        if (dictionnaire[lengthWord][i].Mot === word) occ++;
     }
     return occ;
 }
@@ -523,5 +530,18 @@ function getPhoneGapPath() {
     var path = window.location.pathname;
     path = path.substr( path, path.length - 10 );
     return 'file://' + path+'res/raw/';
-
 };
+var tt1 ;
+function displayMenu(){
+    document.getElementById('menu').style.display="block";
+    document.getElementById('lengthselected'+lengthWord).checked="checked";
+    document.getElementById('content').style.display="none";
+    document.getElementById('ico_menu').style.display="none";
+}
+function hideMenu(){
+    document.getElementById('menu').style.display="none";
+    document.getElementById('content').style.display="block";
+    document.getElementById('ico_menu').style.display="block";
+    
+}
+hideMenu();

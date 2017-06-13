@@ -141,6 +141,11 @@ box-shadow: 1px 1px 12px #555;
 
 }
 
+#ico_menu{
+    position:absolute;
+    top:0px;
+    left:0px;
+}
 
 /* #### Mobile Phones Portrait #### */
 @media screen and (max-device-width: 480px) and (orientation: portrait){
@@ -192,3 +197,4 @@ box-shadow: 1px 1px 12px #555;
         max-width: 560px;
   } 
 }
+
