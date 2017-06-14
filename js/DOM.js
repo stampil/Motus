@@ -442,7 +442,7 @@ function displayWord(line, mot, nb_indice) {
     var indice_use = new Array();
     while(nb_indice>0){
 
-        var indice = Math.round(Math.random()*5)+2; // on veux aller jusqu'a 7 (5+2) mais commencé avec 2 ( 0+2)
+        var indice = Math.round(Math.random()*(lengthWord-2))+2; // on veux aller jusqu'a 7 (5+2) mais commencé avec 2 ( 0+2)
         if(indice_use.indexOf(indice)==-1){
             
             nb_indice--;
