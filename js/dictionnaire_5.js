@@ -4992,7 +4992,7 @@ dictionnaire[5] = [
 {"Mot":"OCULI","Dur":3},
 {"Mot":"ODEON","Dur":3},
 {"Mot":"ODEUR","Dur":1},
-{"Mot":"OEILS","Dur":1},
+{"Mot":"OEILS","Dur":3},
 {"Mot":"OEUFS","Dur":1},
 {"Mot":"OEUVE","Dur":3},
 {"Mot":"OFFRE","Dur":1},
