@@ -140,7 +140,7 @@ dictionnaire[8] = [
 {"Mot":"ABONDENT","Dur":3},
 {"Mot":"ABONDERA","Dur":3},
 {"Mot":"ABONDIEZ","Dur":3},
-{"Mot":"ABONDONS","Dur":1},
+{"Mot":"ABONDONS","Dur":3},
 {"Mot":"ABONNAIS","Dur":3},
 {"Mot":"ABONNAIT","Dur":3},
 {"Mot":"ABONNANT","Dur":3},
