@@ -32,7 +32,7 @@ function initGame(nb_word) {
     nb_game =cookie.get("nb_game") || 0;
     nb_reussite_total =cookie.get("nb_reussite_total") || 0;
     super_partie_trouve = cookie.get("super_partie_trouve") || 0;
-    nb_joker = cookie.get("nb_joker") || 0;
+    nb_joker = cookie.get("nb_joker") || 3;
     super_partie_faite =  cookie.get("super_partie_faite") || 0;
     lengthWord = cookie.get("lengthWord") || 7;
     
