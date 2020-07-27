@@ -163,10 +163,10 @@ box-shadow: 1px 1px 12px #555;
 }
 
 .show{
-    visibility: visible;
+    
 }
 .hide{
-    visibility: hidden;
+    background:lightgray !important;
 }
 
 /* #### Mobile Phones Portrait #### */
