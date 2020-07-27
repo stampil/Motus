@@ -90,6 +90,21 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cfbc0f00', e
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3019', endColorstr='#cf0404',GradientType=0 ); /* IE6-9 */
 
 }
+
+.joker{
+    
+    font-weight: bold;
+    background: #f1ff19 !important; /* Old browsers */
+    background: -moz-linear-gradient(top,  #f1ff19 0%, #5bcf04 100%) !important; /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f1ff19), color-stop(100%,#5bcf04)) !important; /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #f1ff19 0%,#5bcf04 100%) !important; /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #f1ff19 0%,#5bcf04 100%) !important; /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #f1ff19 0%,#5bcf04 100%) !important; /* IE10+ */
+    background: linear-gradient(to bottom,  #f1ff19 0%,#5bcf04 100%) !important; /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1ff19', endColorstr='#5bcf04',GradientType=0 ) !important; /* IE6-9 */
+
+}
+
 #clavier{
 
 text-transform: capitalize;
@@ -145,6 +160,13 @@ box-shadow: 1px 1px 12px #555;
     position:absolute;
     top:0px;
     left:0px;
+}
+
+.show{
+    visibility: visible;
+}
+.hide{
+    visibility: hidden;
 }
 
 /* #### Mobile Phones Portrait #### */

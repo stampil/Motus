@@ -32,6 +32,7 @@ function initGame(nb_word) {
     nb_game =cookie.get("nb_game") || 0;
     nb_reussite_total =cookie.get("nb_reussite_total") || 0;
     super_partie_trouve = cookie.get("super_partie_trouve") || 0;
+    nb_joker = cookie.get("nb_joker") || 0;
     super_partie_faite =  cookie.get("super_partie_faite") || 0;
     lengthWord = cookie.get("lengthWord") || 7;
     
@@ -199,6 +200,39 @@ function constructGameTable() {
     setCurrentColumn(2);
 }
 
+function useJoker(){
+    console.log("joker before use : "+nb_joker);
+    if(!nb_joker) return false;
+    
+    console.log("Line: "+L+" tofind:  : "+toFind);
+    
+    for (var i = 1; i <= lengthWord; i++) {
+       
+        if (document.getElementById("L" + L  + "C" + i).textContent==".") {
+            console.log("to show letter :"+i+" : "+toFind[i-1]);
+            
+            //document.getElementById("L" + L  + "C" + i).textContent=toFind[i-1];
+            
+            C=i;
+            setCurrentColumn(C);
+            
+            writeKey(toFind[i-1]);
+            nb_joker--;
+            break;
+        }
+        else{
+            jumpKey();
+        }
+        console.log('tryword in joker :' +tryWord);
+    }
+    
+    if(nb_joker<0) nb_joker=0;
+    cookie.set("nb_joker",nb_joker);
+    document.getElementById("touche_help").textContent=nb_joker;
+    document.getElementById("touche_help").setAttribute('class', 'touches joker '+(nb_joker>0?'show ':'hide'));
+    displayScore();
+}
+
 function jumpKey() {
 	console.log("jumpKey",C,goodKey[C - 1]);
     if (goodKey[C - 1] != ".") {
@@ -228,6 +262,8 @@ function verifWord(){
 	 else{
 		 return false;
 	 }
+         console.log("tryword: "+tryWord);
+         
 	 var valid = validateWord(tryWord);
         ajax("action=statsTry&tryWord=" + tryWord + "&inDico=" + valid);
 
@@ -248,8 +284,12 @@ function verifWord(){
                 if(is_super_partie){
                     applause.play();
                     super_partie_trouve++;
+                    nb_joker++;
+                    document.getElementById("touche_help").setAttribute('class', 'touches joker '+(nb_joker>0?'show ':'hide'));
+                    if(nb_joker>99) nb_joker=99;
                     super_partie_faite++;
                     cookie.set("super_partie_trouve",super_partie_trouve);
+                    cookie.set("nb_joker",nb_joker);
                     cookie.set("super_partie_faite",super_partie_faite);
                     decompte_super_parti = declenchement_super_parti;
                 }
@@ -279,6 +319,7 @@ function writeKey(key) {
     document.getElementById("L" + L + "C" + C).textContent = key;
     tryWord += key;
     C++;
+    console.log('writekey '+key+ "tryword= "+tryWord);
     
     if (C <= lengthWord ) {
         setCurrentColumn(C);
@@ -410,6 +451,7 @@ function constructClavier() {
         eraseKey();
     };
     o.appendChild(div);
+    
     var div = document.createElement("div");
     div.setAttribute('id', 'touche_forward');
     div.setAttribute('value', '1');
@@ -417,6 +459,17 @@ function constructClavier() {
     div.textContent = '→';
     div.onmousedown = function () {
         jumpKey();
+    };
+    o.appendChild(div);
+    
+    var div = document.createElement("div");
+    div.setAttribute('id', 'touche_help');
+    div.setAttribute('value', nb_joker);
+    div.setAttribute('class', 'touches joker '+(nb_joker>0?'show ':'hide'));
+
+    div.textContent = nb_joker;
+    div.onmousedown = function () {
+        useJoker();
     };
     o.appendChild(div);
 }
@@ -492,8 +545,9 @@ function setSoluce() {
 }
 
 function displayScore() {
-    document.getElementById('score').textContent = "mot" + (nb_reussite_total > 1 ? "s" : "") + " trouvé" + (nb_reussite_total > 1 ? "s" : "") + " : " + nb_reussite_total + "/" + nb_game;
-     document.getElementById('score').textContent +=" | super partie : "+super_partie_trouve+"/"+super_partie_faite;
+    document.getElementById('score').textContent = "Mot" + (nb_reussite_total > 1 ? "s" : "") + " trouvé" + (nb_reussite_total > 1 ? "s" : "") + " : " + nb_reussite_total + "/" + nb_game;
+     document.getElementById('score').textContent +=" | Super partie : "+super_partie_trouve+"/"+super_partie_faite;
+     document.getElementById('score').textContent += " | Joker : "+nb_joker;
 }
 
 function ajax(data) {
