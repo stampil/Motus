@@ -9482,7 +9482,7 @@ dictionnaire[7] = [
 {"Mot":"MANETON","Dur":3},
 {"Mot":"MANETTE","Dur":1},
 {"Mot":"MANGEES","Dur":1},
-{"Mot":"MANGERS","Dur":1},
+{"Mot":"MANGERS","Dur":3},
 {"Mot":"MANGEUR","Dur":1},
 {"Mot":"MANGLES","Dur":3},
 {"Mot":"MANGUES","Dur":2},
