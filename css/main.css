@@ -102,7 +102,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cfbc0f00', e
     background: -ms-linear-gradient(top,  #f1ff19 0%,#5bcf04 100%) !important; /* IE10+ */
     background: linear-gradient(to bottom,  #f1ff19 0%,#5bcf04 100%) !important; /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1ff19', endColorstr='#5bcf04',GradientType=0 ) !important; /* IE6-9 */
-
+    margin-left:50px !important;
 }
 
 #clavier{

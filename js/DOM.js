@@ -32,7 +32,7 @@ function initGame(nb_word) {
     nb_game =cookie.get("nb_game") || 0;
     nb_reussite_total =cookie.get("nb_reussite_total") || 0;
     super_partie_trouve = cookie.get("super_partie_trouve") || 0;
-    nb_joker = cookie.get("nb_joker") || 3;
+    nb_joker = cookie.get("nb_joker") || 5;
     super_partie_faite =  cookie.get("super_partie_faite") || 0;
     lengthWord = cookie.get("lengthWord") || 7;
     
@@ -203,7 +203,7 @@ function constructGameTable() {
 function useJoker(){
     console.log("joker before use : "+nb_joker);
     if(!nb_joker) return false;
-    
+    if(nb_joker<=0) return false;
     console.log("Line: "+L+" tofind:  : "+toFind);
     
     for (var i = 1; i <= lengthWord; i++) {
