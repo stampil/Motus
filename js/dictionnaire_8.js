@@ -18910,7 +18910,7 @@ dictionnaire[8] = [
 {"Mot":"ESPERIEZ","Dur":3},
 {"Mot":"ESPERONS","Dur":3},
 {"Mot":"ESPIEGLE","Dur":1},
-{"Mot":"ESPIONNA","Dur":1},
+{"Mot":"ESPIONNA","Dur":3},
 {"Mot":"ESPIONNE","Dur":1},
 {"Mot":"ESPONTON","Dur":3},
 {"Mot":"ESPOUTIE","Dur":3},
